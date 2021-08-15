@@ -9,6 +9,10 @@ class Ship
 		this.image=img_background;
 		this.position_x = 0;
 		this.position_y = 0;
+		this.current_animation_frame = 2;
+		this.max_animation_frame = 4;
+		this.current_frame_rate = 20;
+		this.max_frame_rate = 10;
 	}
 
 
@@ -34,9 +38,31 @@ class Ship
 
 	render()
 	{
-
-		this.context.drawImage(this.image, 0, 0, 64, 64, this.position_x, this.position_y, 64, 64);
+		let animationFrame = this.getAnimationFrame(this.current_animation_frame);
+		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 64, 64, this.position_x, this.position_y, 64, 64);
+		
+		this.current_frame_rate-=1
+		if(this.current_frame_rate==0){
+			this.current_animation_frame+=1
+			if(this.current_animation_frame==this.max_animation_frame){
+				this.current_animation_frame=0;
+			}
+			this.current_frame_rate=this.max_frame_rate;
+		}
+		
 					
+	}
+	getAnimationFrame(frame){
+		if(frame == 0){
+			return [0,0]
+		}else if(frame == 1){
+			return [64,0]
+		}else if(frame == 2){
+			return [128,0]
+		}else if(frame == 3){
+			return [196,0]
+		}
+
 	}
 
 }
