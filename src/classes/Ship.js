@@ -13,27 +13,43 @@ class Ship
 		this.max_animation_frame = 4;
 		this.current_frame_rate = 20;
 		this.max_frame_rate = 10;
+		this.movable = true;
+		this.current_movable_speed = 5;
+		this.max_movable_speed = 5;
+
 	}
 
 
 	moveUp()
 	{
-		this.position_y = this.position_y - 1
+		if (this.movable){
+			this.position_y = this.position_y - 64
+			this.movable = false;
+		}
 	}
 
 	moveDown()
 	{
-		this.position_y = this.position_y + 1
+		if (this.movable){
+			this.position_y = this.position_y + 64
+			this.movable = false;
+		}
 	}
 
 	moveLeft()
 	{
-		this.position_x = this.position_x - 1
+		if (this.movable){
+			this.position_x = this.position_x - 64
+			this.movable = false;
+		}
 	}
 
 	moveRight()
 	{
-		this.position_x = this.position_x + 1
+		if (this.movable){
+			this.position_x = this.position_x + 64
+			this.movable = false;
+		}
 	}
 
 	render()
@@ -49,6 +65,15 @@ class Ship
 			}
 			this.current_frame_rate=this.max_frame_rate;
 		}
+
+		if(!this.movable){
+			this.current_movable_speed-=1
+			if(this.current_movable_speed<0){
+				this.movable=true
+				this.current_movable_speed=this.max_movable_speed
+			}
+		}
+		
 		
 					
 	}
