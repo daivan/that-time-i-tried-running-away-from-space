@@ -20,6 +20,7 @@ let canvas = document.getElementById('canvas'),
 cx = canvas.getContext('2d');
 
 let ship = new Ship(cx);
+let goal = new Goal(cx);
 
 //let music = new Music();
 
@@ -97,6 +98,7 @@ function gameLoop() {
 
 
         ship.render();
+        goal.render();
         
 
         lastTime = currentTime - (delta % interval);
