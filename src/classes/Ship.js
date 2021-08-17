@@ -16,10 +16,13 @@ class Ship
 		this.movable = true;
 		this.current_movable_speed = 5;
 		this.max_movable_speed = 5;
+		this.dead = false;
 
 	}
 
-
+	isDead(){
+		return this.dead;
+	}
 	moveUp()
 	{
 		if (this.movable){
@@ -95,6 +98,10 @@ class Ship
 	}
 
 	moveBack(){
+		
+		if(this.position_x <= 0){
+			this.dead = true;
+		}
 		this.position_x = this.position_x - 64
 	}
 }

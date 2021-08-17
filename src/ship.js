@@ -70,6 +70,7 @@ window.addEventListener("keyup", keyup, false);
 window.addEventListener("click", onClick, false);
 
 
+gameState.state = 'playing';
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
@@ -98,6 +99,8 @@ function gameLoop() {
     ship.moveRight();
 }
 
+
+
     currentTime = (new Date()).getTime();
     delta = (currentTime - lastTime);
 
@@ -108,8 +111,20 @@ function gameLoop() {
         cx.clearRect(0, 0, cw, ch);
 
         // RENDER THE TEXT DISPLAY
-        score = game.getScore();
-        textInterface.renderInfoPanel(score);
+        
+        
+        // Stage
+        if(gameState.state==='start_menu'){
+            textInterface.renderStart();
+        }else if(gameState.state==='end'){
+            textInterface.renderEnd();
+        }else if(gameState.state==='dead'){
+            textInterface.renderDead();
+        }else if(gameState.state==='playing'){
+            score = game.getScore();    
+            textInterface.renderInfoPanel(score);
+
+        }
         // End RENDER THE TEXT DISPLAY
 
 
@@ -121,6 +136,9 @@ function gameLoop() {
             goal.moveBack()
             currentLevelTicker=levelTicker
             game.addScore(10)
+            if(ship.isDead()){
+                gameState.state = 'dead';
+            }
         }
 
         lastTime = currentTime - (delta % interval);

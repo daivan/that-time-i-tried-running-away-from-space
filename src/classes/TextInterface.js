@@ -67,8 +67,8 @@ class TextInterface {
 		cx.fillRect(0,0,768,512);
 
 
-		let header = "Server Error";
-		let title = "404 - File or directory not found.";
+		let header = "Game over";
+		let title = "You died!";
 		let subtitle1 = "The resource you are looking for might have been removed...";
 		let subtitle2 = "Or maybe the server is just bad at finding your file.";
 
