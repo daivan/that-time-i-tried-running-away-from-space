@@ -1,9 +1,19 @@
 class Game {
 
   constructor() {
-  	this.nextTile = Math.floor(Math.random() * 9) + 1;
+  	this.score = 0;
   	//this.nextTile = 1;
   }
+
+  addScore(addScore)
+  {
+      this.score+=addScore;
+  }
+
+    getScore()
+    {
+        return this.score;
+    }
 
 	makeMove(event)
 	{

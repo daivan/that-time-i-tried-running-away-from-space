@@ -19,6 +19,10 @@ let canvas = document.getElementById('canvas'),
 
 cx = canvas.getContext('2d');
 
+let game = new Game();
+let gameState = new GameState();
+let textInterface = new TextInterface();
+
 let ship = new Ship(cx);
 let goal = new Goal(cx);
 let currentLevelTicker = 100;
@@ -74,6 +78,11 @@ function gameLoop() {
     if(state.pressedKeys.up){
         ship.moveUp();
     }
+    
+    // Press Space in main menu
+    if(state.pressedKeys.up){
+        ship.moveUp();
+    }
    // Press Space in main menu
    if(state.pressedKeys.down){
     ship.moveDown();
@@ -94,8 +103,14 @@ function gameLoop() {
 
     if (delta > interval) {
 
+
         // clear everything on the screen
         cx.clearRect(0, 0, cw, ch);
+
+        // RENDER THE TEXT DISPLAY
+        score = game.getScore();
+        textInterface.renderInfoPanel(score);
+        // End RENDER THE TEXT DISPLAY
 
 
         ship.render();
@@ -105,6 +120,7 @@ function gameLoop() {
             ship.moveBack()
             goal.moveBack()
             currentLevelTicker=levelTicker
+            game.addScore(10)
         }
 
         lastTime = currentTime - (delta % interval);

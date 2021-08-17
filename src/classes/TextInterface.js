@@ -14,7 +14,7 @@ class TextInterface {
 
 
 
-		cx.drawImage(this.intro_background, 0, 0, 768, 512, 0, 0, 768, 512);
+		//cx.drawImage(this.intro_background, 0, 0, 768, 512, 0, 0, 768, 512);
 
 		let title = "That time I tried running from space";
 		let subtitle = "Best experience in full screen mode <Enter>";
@@ -96,20 +96,12 @@ class TextInterface {
 
 	}
 
-	renderInfoPanel(){
+	renderInfoPanel(score){
 
-		let currentLevel = level.currentLevel + 1;
-		let movesLeft = gameState.movesLeft;
-		let levelText = "Level: " + currentLevel.toString();
-		let movesLeftText = "Moves left: " + movesLeft.toString();
-		let nextTileText = "Next Tile: ";
+		let scoreText = "Score: " + score;
 		cx.font = "12px Arial";
-		cx.fillStyle = "#000";  //<======= here
-		cx.fillText(levelText, 530, 18);
-		cx.fillText(movesLeftText, 530, 38);
-		cx.fillText(nextTileText, 530, 58);
-
-		let croppedImage = Background.calculate(game.nextTile);
-		cx.drawImage(this.image, croppedImage[0], croppedImage[1], 64, 64, 530, 68, 64, 64);
+		cx.fillStyle = "#000";
+		cx.fillText(scoreText, 530, 18);
+		
 	}
 }
