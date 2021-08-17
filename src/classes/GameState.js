@@ -99,4 +99,8 @@ class GameState {
 			});
 		}
 	}
+
+	getObjectIn(location){
+		return true;
+	}
 }

@@ -104,4 +104,9 @@ class Ship
 		}
 		this.position_x = this.position_x - 64
 	}
+
+	
+	vibrate(){
+
+	}	
 }

@@ -79,13 +79,18 @@ function gameLoop() {
 
     // Press Space in main menu
     if(state.pressedKeys.up){
-        ship.moveUp();
+        shipLocation = ship.getPosition()
+        shipLocation[0]-=64
+        isEmpty = gameState.getObjectIn(shipLocation)
+        console.log(isEmpty);
+        if(isEmpty){
+            ship.moveUp();
+        }else{
+            ship.vibrate();
+        }
+        
     }
-    
-    // Press Space in main menu
-    if(state.pressedKeys.up){
-        ship.moveUp();
-    }
+
    // Press Space in main menu
    if(state.pressedKeys.down){
     ship.moveDown();
