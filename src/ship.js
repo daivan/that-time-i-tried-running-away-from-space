@@ -19,10 +19,12 @@ let canvas = document.getElementById('canvas'),
 
 cx = canvas.getContext('2d');
 
+
 let game = new Game();
 let gameState = new GameState();
 let textInterface = new TextInterface();
 
+let obstacle = new Obstacle(cx);
 let ship = new Ship(cx);
 let goal = new Goal(cx);
 let currentLevelTicker = 100;
@@ -130,8 +132,10 @@ function gameLoop() {
 
         ship.render();
         goal.render();
+        obstacle.render();
         currentLevelTicker-=1
         if(currentLevelTicker < 0){
+            obstacle.moveBack()
             ship.moveBack()
             goal.moveBack()
             currentLevelTicker=levelTicker
