@@ -21,7 +21,8 @@ cx = canvas.getContext('2d');
 
 let ship = new Ship(cx);
 let goal = new Goal(cx);
-
+let currentLevelTicker = 100;
+let levelTicker = 100;
 //let music = new Music();
 
 
@@ -99,7 +100,12 @@ function gameLoop() {
 
         ship.render();
         goal.render();
-        
+        currentLevelTicker-=1
+        if(currentLevelTicker < 0){
+            ship.moveBack()
+            goal.moveBack()
+            currentLevelTicker=levelTicker
+        }
 
         lastTime = currentTime - (delta % interval);
     }

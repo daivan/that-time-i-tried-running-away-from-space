@@ -26,4 +26,7 @@ class Goal {
 		cx.fillText('Goal', this.x+5, this.y+61);
     }
 
+    moveBack(){
+		this.x -= 64
+	}
 }
