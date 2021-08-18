@@ -7,7 +7,6 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
 }
 
-
 let canvas = document.getElementById('canvas'),
     cw = canvas.width,
     ch = canvas.height,
