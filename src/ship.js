@@ -26,7 +26,7 @@ let textInterface = new TextInterface();
 
 let obstacleList = []
 let obstacle = new Obstacle(cx);
-obstacle.x = 200
+obstacle.x = 192
 let obstacle2 = new Obstacle(cx);
 obstacleList.push(obstacle)
 obstacleList.push(obstacle2)
@@ -69,7 +69,7 @@ function keydown(event) {
 
 function keyup(event) {
     let key = keyMap[event.code];
-    state.pressedKeys[key] = false
+    state.pressedKeys[key] = false;
 }
 
 function onClick(event) {
@@ -89,33 +89,100 @@ function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 
     // Press Space in main menu
-    if(state.pressedKeys.up){
+    if (state.pressedKeys.up) {
+
+
         shipLocation = ship.getPosition()
-        shipLocation[0]-=64
-        isEmpty = gameState.isSpaceEmpty(shipLocation)
-        console.log(isEmpty);
-        if(isEmpty){
+        shipLocation[1] -= 64
+        isUpEmpty = true;
+        obstacleList.map(obstacle => {
+            obstacleLocation = obstacle.getLocation()
+            console.log(obstacleLocation, shipLocation)
+            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                isUpEmpty = false;
+            }
+
+        }
+
+        );
+
+        if (isUpEmpty) {
             ship.moveUp();
-        }else{
+        } else {
             ship.vibrate();
         }
-        
+
     }
 
-   // Press Space in main menu
-   if(state.pressedKeys.down){
-    ship.moveDown();
-}
+    // Press Space in main menu
+    if (state.pressedKeys.down) {
+        shipLocation = ship.getPosition()
+        shipLocation[1] += 64
+        isUpEmpty = true;
+        obstacleList.map(obstacle => {
+            obstacleLocation = obstacle.getLocation()
+            console.log(obstacleLocation, shipLocation)
+            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                isUpEmpty = false;
+            }
 
-   // Press Space in main menu
-   if(state.pressedKeys.left){
-    ship.moveLeft();
-}
+        }
 
-   // Press Space in main menu
-   if(state.pressedKeys.right){
-    ship.moveRight();
-}
+        );
+
+        if (isUpEmpty) {
+            ship.moveDown();
+        } else {
+            ship.vibrate();
+        }
+
+    }
+
+    // Press Space in main menu
+    if (state.pressedKeys.left) {
+        shipLocation = ship.getPosition()
+        shipLocation[0] -= 64
+        isUpEmpty = true;
+        obstacleList.map(obstacle => {
+            obstacleLocation = obstacle.getLocation()
+            console.log(obstacleLocation, shipLocation)
+            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                isUpEmpty = false;
+            }
+
+        }
+
+        );
+
+        if (isUpEmpty) {
+            ship.moveLeft();
+        } else {
+            ship.vibrate();
+        }
+    }
+
+    // Press Space in main menu
+    if (state.pressedKeys.right) {
+        shipLocation = ship.getPosition()
+        shipLocation[0] += 64
+        isUpEmpty = true;
+        obstacleList.map(obstacle => {
+            obstacleLocation = obstacle.getLocation()
+            console.log(obstacleLocation, shipLocation)
+            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                isUpEmpty = false;
+            }
+
+        }
+
+        );
+
+        if (isUpEmpty) {
+            ship.moveRight();
+        } else {
+            ship.vibrate();
+        }
+    }
 
 
 
@@ -129,17 +196,17 @@ function gameLoop() {
         cx.clearRect(0, 0, cw, ch);
 
         // RENDER THE TEXT DISPLAY
-        
-        
+
+
         // Stage
-        if(gameState.state==='start_menu'){
+        if (gameState.state === 'start_menu') {
             textInterface.renderStart();
-        }else if(gameState.state==='end'){
+        } else if (gameState.state === 'end') {
             textInterface.renderEnd();
-        }else if(gameState.state==='dead'){
+        } else if (gameState.state === 'dead') {
             textInterface.renderDead();
-        }else if(gameState.state==='playing'){
-            score = game.getScore();    
+        } else if (gameState.state === 'playing') {
+            score = game.getScore();
             textInterface.renderInfoPanel(score);
 
         }
@@ -149,23 +216,21 @@ function gameLoop() {
         ship.render();
         goal.render();
         obstacleList.map(obstacle => obstacle.render())
-        //obstacle.render();
-        //obstacle2.render();
-        currentLevelTicker-=1
-        if(currentLevelTicker < 0){
+        currentLevelTicker -= 1
+        if (currentLevelTicker < 0) {
             obstacleList.map(obstacle => obstacle.moveBack())
             ship.moveBack()
             goal.moveBack()
-            currentLevelTicker=levelTicker
+            currentLevelTicker = levelTicker
             game.addScore(10)
-            if(ship.isDead()){
+            if (ship.isDead()) {
                 gameState.state = 'dead';
             }
 
             let obstacle = new Obstacle(cx);
-            obstacle.x = 720
-            obstacle.y = Math.floor(Math.random() * 5)*64;
-            obstacleList.push(obstacle)
+            obstacle.x = 640
+            obstacle.y = Math.floor(Math.random() * 5) * 64;
+            //obstacleList.push(obstacle)
         }
 
         lastTime = currentTime - (delta % interval);

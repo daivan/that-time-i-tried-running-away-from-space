@@ -94,7 +94,7 @@ class Ship
 	}
 
 	getPosition(){
-		return [this.position_y,this.position_x]
+		return [this.position_x,this.position_y]
 	}
 
 	moveBack(){
