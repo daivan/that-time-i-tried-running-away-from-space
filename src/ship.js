@@ -24,7 +24,18 @@ let game = new Game();
 let gameState = new GameState();
 let textInterface = new TextInterface();
 
+let obstacleList = []
 let obstacle = new Obstacle(cx);
+obstacle.x = 200
+let obstacle2 = new Obstacle(cx);
+obstacleList.push(obstacle)
+obstacleList.push(obstacle2)
+
+gameState.addObject(obstacle)
+gameState.addObject(obstacle2)
+
+let spawner = new Spawner(cx);
+
 let ship = new Ship(cx);
 let goal = new Goal(cx);
 let currentLevelTicker = 100;
@@ -81,7 +92,7 @@ function gameLoop() {
     if(state.pressedKeys.up){
         shipLocation = ship.getPosition()
         shipLocation[0]-=64
-        isEmpty = gameState.getObjectIn(shipLocation)
+        isEmpty = gameState.isSpaceEmpty(shipLocation)
         console.log(isEmpty);
         if(isEmpty){
             ship.moveUp();
@@ -137,10 +148,12 @@ function gameLoop() {
 
         ship.render();
         goal.render();
-        obstacle.render();
+        obstacleList.map(obstacle => obstacle.render())
+        //obstacle.render();
+        //obstacle2.render();
         currentLevelTicker-=1
         if(currentLevelTicker < 0){
-            obstacle.moveBack()
+            obstacleList.map(obstacle => obstacle.moveBack())
             ship.moveBack()
             goal.moveBack()
             currentLevelTicker=levelTicker
@@ -148,6 +161,11 @@ function gameLoop() {
             if(ship.isDead()){
                 gameState.state = 'dead';
             }
+
+            let obstacle = new Obstacle(cx);
+            obstacle.x = 720
+            obstacle.y = Math.floor(Math.random() * 5)*64;
+            obstacleList.push(obstacle)
         }
 
         lastTime = currentTime - (delta % interval);

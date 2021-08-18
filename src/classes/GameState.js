@@ -6,6 +6,12 @@ class GameState {
   	this.stage = 0;
   	this.movesLeft = 0;
   	this.map = [];
+	this.objects = [];
+  }
+
+ 
+  addObject(object){
+	  this.objects.push(object)
   }
 
   checkGameOver()
@@ -15,6 +21,7 @@ class GameState {
 	}
   }
 
+  
   checkLevelComplete()
   {
 
@@ -100,7 +107,30 @@ class GameState {
 		}
 	}
 
+	printAllObjectLocations(){
+		this.objects.map(function(e){
+			console.log(e.getLocation())
+		})
+		
+	}
+
 	getObjectIn(location){
-		return true;
+		let objectInLocation = false;
+		objectInLocation = this.objects.map((object)=>{
+			if(object.getLocation()[0] == location[0] && object.getLocation()[1] == location[1]){
+				return 'bajs'
+			}
+		})
+		//console.log(this.objects)
+		return objectInLocation;
+	}
+
+	isSpaceEmpty(location) {
+		let isSpaceEmpty = true;
+		isSpaceEmpty = this.objects.filter( object => object.getLocation()[0] == location[0] && object.getLocation()[1] == location[1] );
+		if (isSpaceEmpty.length > 0){
+			return false
+		}
+		return true
 	}
 }
