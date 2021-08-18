@@ -90,55 +90,69 @@ function gameLoop() {
 
     // Press Space in main menu
     if (state.pressedKeys.up) {
-
-
         shipLocation = ship.getPosition()
-        shipLocation[1] -= 64
-        isUpEmpty = true;
-        obstacleList.map(obstacle => {
-            obstacleLocation = obstacle.getLocation()
-            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
-                isUpEmpty = false;
+        // if ship is in the top
+        if(shipLocation[1]==0){
+            isUpEmpty = false
+        }else{
+            
+            shipLocation[1] -= 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+    
             }
-
+    
+            );
+    
+            if (isUpEmpty) {
+                ship.moveUp();
+            } else {
+                ship.vibrate();
+            }
         }
-
-        );
-
-        if (isUpEmpty) {
-            ship.moveUp();
-        } else {
-            ship.vibrate();
-        }
+        
 
     }
 
     // Press Space in main menu
     if (state.pressedKeys.down) {
         shipLocation = ship.getPosition()
-        shipLocation[1] += 64
-        isUpEmpty = true;
-        obstacleList.map(obstacle => {
-            obstacleLocation = obstacle.getLocation()
-            if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
-                isUpEmpty = false;
+        // if ship is in the bottom
+        if(shipLocation[1]==448){
+            isUpEmpty = false
+        }else{
+            shipLocation[1] += 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+
             }
 
-        }
+            );
 
-        );
-
-        if (isUpEmpty) {
-            ship.moveDown();
-        } else {
-            ship.vibrate();
-        }
+            if (isUpEmpty) {
+                ship.moveDown();
+            } else {
+                ship.vibrate();
+            }
+    }
 
     }
 
     // Press Space in main menu
     if (state.pressedKeys.left) {
         shipLocation = ship.getPosition()
+        // if ship is in the bottom
+        if(shipLocation[0]==0){
+            isUpEmpty = false
+        }else{
         shipLocation[0] -= 64
         isUpEmpty = true;
         obstacleList.map(obstacle => {
@@ -157,10 +171,15 @@ function gameLoop() {
             ship.vibrate();
         }
     }
+    }
 
     // Press Space in main menu
     if (state.pressedKeys.right) {
         shipLocation = ship.getPosition()
+        // if ship is in the bottom
+        if(shipLocation[0]==704){
+            isUpEmpty = false
+        }else{
         shipLocation[0] += 64
         isUpEmpty = true;
         obstacleList.map(obstacle => {
@@ -178,6 +197,7 @@ function gameLoop() {
         } else {
             ship.vibrate();
         }
+    }
     }
 
 
