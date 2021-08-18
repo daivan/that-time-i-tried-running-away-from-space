@@ -7,12 +7,6 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
 }
 
-let requests = [];
-let goals = [];
-let music=new Music(audioCtx)
-let game = new Game();
-let gameState = new GameState();
-let level = new Levels(0);
 let canvas = document.getElementById('canvas'),
     cw = canvas.width,
     ch = canvas.height,
@@ -24,8 +18,27 @@ let canvas = document.getElementById('canvas'),
 
 cx = canvas.getContext('2d');
 
-let Background = new TileSheet(cx);
+let game = new Game();
+let gameState = new GameState();
 let textInterface = new TextInterface();
+let music = new Music(audioCtx)
+
+let obstacleList = []
+let obstacle = new Obstacle(cx);
+obstacle.x = 192
+let obstacle2 = new Obstacle(cx);
+obstacleList.push(obstacle)
+obstacleList.push(obstacle2)
+
+gameState.addObject(obstacle)
+gameState.addObject(obstacle2)
+
+let spawner = new Spawner(cx);
+
+let ship = new Ship(cx);
+let goal = new Goal(cx);
+let currentLevelTicker = 100;
+let levelTicker = 100;
 //let music = new Music();
 
 
@@ -55,7 +68,7 @@ function keydown(event) {
 
 function keyup(event) {
     let key = keyMap[event.code];
-    state.pressedKeys[key] = false
+    state.pressedKeys[key] = false;
 }
 
 function onClick(event) {
@@ -69,57 +82,193 @@ window.addEventListener("keyup", keyup, false);
 window.addEventListener("click", onClick, false);
 
 
-function searchForArray(haystack, needle){
-    var i, j, current;
-    for(i = 0; i < haystack.length; ++i){
-        if(needle.length === haystack[i].length){
-            current = haystack[i];
-            for(j = 0; j < needle.length && needle[j] === current[j]; ++j);
-            if(j === needle.length)
-                return i;
-        }
-    }
-    return -1;
-}
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 
-    // Press Space in main menu
-    if(state.pressedKeys.space && gameState.state==='start_menu'){
-        music.play();
-        //playMusic();
-        gameState.initiateLevel(level.getCurrentLevel());
-        gameState.state='inGame';
-    }
 
+        // Press Space in main menu
+        if(state.pressedKeys.space && gameState.state==='start_menu'){
+            music.play();
+            
+            gameState.state='playing';
+        }
     // Press Space if dead
     if(state.pressedKeys.space && gameState.state==='dead'){
-        gameState.initiateLevel(level.getCurrentLevel());
-        gameState.state='inGame';
+
+        gameState.state='playing';
     }
+
+    // Press Space in main menu
+    if (state.pressedKeys.up) {
+
+        shipLocation = ship.getPosition()
+        // if ship is in the top
+        if (shipLocation[1] == 0) {
+            isUpEmpty = false
+        } else {
+
+            shipLocation[1] -= 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+
+            }
+
+            );
+
+            if (isUpEmpty) {
+                ship.moveUp();
+            } else {
+                ship.vibrate();
+            }
+        }
+
+
+    }
+
+    // Press Space in main menu
+    if (state.pressedKeys.down) {
+        shipLocation = ship.getPosition()
+        // if ship is in the bottom
+        if (shipLocation[1] == 448) {
+            isUpEmpty = false
+        } else {
+            shipLocation[1] += 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+
+            }
+
+            );
+
+            if (isUpEmpty) {
+                ship.moveDown();
+            } else {
+                ship.vibrate();
+            }
+        }
+
+    }
+
+    // Press Space in main menu
+    if (state.pressedKeys.left) {
+        shipLocation = ship.getPosition()
+        // if ship is in the bottom
+        if (shipLocation[0] == 0) {
+            isUpEmpty = false
+        } else {
+            shipLocation[0] -= 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+
+            }
+
+            );
+
+            if (isUpEmpty) {
+                ship.moveLeft();
+            } else {
+                ship.vibrate();
+            }
+        }
+    }
+
+    // Press Space in main menu
+    if (state.pressedKeys.right) {
+        shipLocation = ship.getPosition()
+        // if ship is in the bottom
+        if (shipLocation[0] == 704) {
+            isUpEmpty = false
+        } else {
+            shipLocation[0] += 64
+            isUpEmpty = true;
+            obstacleList.map(obstacle => {
+                obstacleLocation = obstacle.getLocation()
+                if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
+                    isUpEmpty = false;
+                }
+
+            }
+
+            );
+
+            if (isUpEmpty) {
+                ship.moveRight();
+            } else {
+                ship.vibrate();
+            }
+        }
+    }
+
+
 
     currentTime = (new Date()).getTime();
     delta = (currentTime - lastTime);
 
     if (delta > interval) {
 
+
+        // clear everything on the screen
         cx.clearRect(0, 0, cw, ch);
 
+        // RENDER THE TEXT DISPLAY
+
+
         // Stage
-        if(gameState.state==='start_menu'){
+        if (gameState.state === 'start_menu') {
             textInterface.renderStart();
-        }else if(gameState.state==='end'){
+        } else if (gameState.state === 'end') {
             textInterface.renderEnd();
-        }else if(gameState.state==='dead'){
-            game.update();
+        } else if (gameState.state === 'dead') {
             textInterface.renderDead();
-        }else{
-            game.update();
+        } else if (gameState.state === 'playing') {
+            score = game.getScore();
+            textInterface.renderInfoPanel(score);
+
+
+
+
+            // PLAYING THE ACTUAL GAME
+            ship.render();
+            goal.render();
+            obstacleList.map(obstacle => obstacle.render())
+            currentLevelTicker -= 1
+            if (currentLevelTicker < 0) {
+                obstacleList.map(obstacle => obstacle.moveBack())
+                ship.moveBack()
+                goal.moveBack()
+                currentLevelTicker = levelTicker
+                game.addScore(10)
+                if (ship.isDead()) {
+                    gameState.state = 'dead';
+                }
+
+                let obstacle = new Obstacle(cx);
+                obstacle.x = 640
+                obstacle.y = Math.floor(Math.random() * 8) * 64;
+                obstacleList.push(obstacle)
+            }
+
+            lastTime = currentTime - (delta % interval);
+
 
         }
+        // End RENDER THE TEXT DISPLAY
 
-        lastTime = currentTime - (delta % interval);
+
+
     }
 }
 
@@ -144,34 +293,3 @@ function loadImage(url) {
         imageObj.src = url;
     });
 }
-
-
-// Fullscreen with Enter button
-window.addEventListener("load", startup, false);
-
-function startup() {
-  // Get the reference to video
-  const video = document.getElementById("canvas");
-
-  // On pressing ENTER call toggleFullScreen method
-  document.addEventListener("keypress", function(e) {
-    if (e.key === 'Enter') {
-      toggleFullScreen(video);
-    }
-  }, false);
-}
-
-function toggleFullScreen(video) {
-  if (!document.fullscreenElement) {
-    // If the document is not in full screen mode
-    // make the video full screen
-    video.requestFullscreen();
-  } else {
-    // Otherwise exit the full screen
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
-}
-
-// End Fullscreen with Enter button
