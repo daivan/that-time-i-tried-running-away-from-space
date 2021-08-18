@@ -97,7 +97,6 @@ function gameLoop() {
         isUpEmpty = true;
         obstacleList.map(obstacle => {
             obstacleLocation = obstacle.getLocation()
-            console.log(obstacleLocation, shipLocation)
             if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                 isUpEmpty = false;
             }
@@ -121,7 +120,6 @@ function gameLoop() {
         isUpEmpty = true;
         obstacleList.map(obstacle => {
             obstacleLocation = obstacle.getLocation()
-            console.log(obstacleLocation, shipLocation)
             if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                 isUpEmpty = false;
             }
@@ -145,7 +143,6 @@ function gameLoop() {
         isUpEmpty = true;
         obstacleList.map(obstacle => {
             obstacleLocation = obstacle.getLocation()
-            console.log(obstacleLocation, shipLocation)
             if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                 isUpEmpty = false;
             }
@@ -168,7 +165,6 @@ function gameLoop() {
         isUpEmpty = true;
         obstacleList.map(obstacle => {
             obstacleLocation = obstacle.getLocation()
-            console.log(obstacleLocation, shipLocation)
             if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                 isUpEmpty = false;
             }
@@ -229,8 +225,8 @@ function gameLoop() {
 
             let obstacle = new Obstacle(cx);
             obstacle.x = 640
-            obstacle.y = Math.floor(Math.random() * 5) * 64;
-            //obstacleList.push(obstacle)
+            obstacle.y = Math.floor(Math.random() * 8) * 64;
+            obstacleList.push(obstacle)
         }
 
         lastTime = currentTime - (delta % interval);
