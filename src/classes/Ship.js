@@ -7,8 +7,8 @@ class Ship
 		img_background.src = 'assets/images/collection.png';
 		this.context=context;
 		this.image=img_background;
-		this.position_x = 0;
-		this.position_y = 0;
+		this.position_x = 64;
+		this.position_y = 64;
 		this.current_animation_frame = 2;
 		this.max_animation_frame = 4;
 		this.current_frame_rate = 20;
@@ -20,6 +20,11 @@ class Ship
 
 	}
 
+	resetGame(){
+		this.position_x = 64;
+		this.position_y = 64;
+		this.dead = false;
+	}
 	isDead(){
 		return this.dead;
 	}

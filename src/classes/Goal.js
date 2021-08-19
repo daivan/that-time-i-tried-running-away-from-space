@@ -5,7 +5,7 @@ class Goal {
         image.src = 'assets/images/collection.png';
         this.context = context;
         this.image = image;
-        this.x = 64;
+        this.x = 256;
         this.y = 64;
         this.start = [0, 0];
         this.xFrame = 64;

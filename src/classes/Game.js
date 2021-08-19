@@ -15,6 +15,11 @@ class Game {
         return this.score;
     }
 
+    resetGame()
+    {
+        this.score = 0;
+    }
+
 	makeMove(event)
 	{
 	    let mouseX = event.pageX;

@@ -90,12 +90,15 @@ function gameLoop() {
         // Press Space in main menu
         if(state.pressedKeys.space && gameState.state==='start_menu'){
             music.play();
-            
+
             gameState.state='playing';
         }
     // Press Space if dead
     if(state.pressedKeys.space && gameState.state==='dead'){
 
+        game.resetGame()
+        ship.resetGame()
+        obstacleList = []
         gameState.state='playing';
     }
 
