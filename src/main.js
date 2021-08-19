@@ -24,19 +24,9 @@ let textInterface = new TextInterface();
 let music = new Music(audioCtx)
 
 let obstacleList = []
-let obstacle = new Obstacle(cx);
-obstacle.x = 192
-let obstacle2 = new Obstacle(cx);
-obstacleList.push(obstacle)
-obstacleList.push(obstacle2)
-
-gameState.addObject(obstacle)
-gameState.addObject(obstacle2)
-
-let spawner = new Spawner(cx);
 
 let ship = new Ship(cx);
-let goal = new Goal(cx);
+
 let currentLevelTicker = 100;
 let levelTicker = 100;
 //let music = new Music();
@@ -87,19 +77,19 @@ function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 
 
-        // Press Space in main menu
-        if(state.pressedKeys.space && gameState.state==='start_menu'){
-            music.play();
+    // Press Space in main menu
+    if (state.pressedKeys.space && gameState.state === 'start_menu') {
+        music.play();
 
-            gameState.state='playing';
-        }
+        gameState.state = 'playing';
+    }
     // Press Space if dead
-    if(state.pressedKeys.space && gameState.state==='dead'){
+    if (state.pressedKeys.space && gameState.state === 'dead') {
 
         game.resetGame()
         ship.resetGame()
         obstacleList = []
-        gameState.state='playing';
+        gameState.state = 'playing';
     }
 
     // Press Space in main menu
@@ -245,13 +235,11 @@ function gameLoop() {
 
             // PLAYING THE ACTUAL GAME
             ship.render();
-            goal.render();
             obstacleList.map(obstacle => obstacle.render())
             currentLevelTicker -= 1
             if (currentLevelTicker < 0) {
                 obstacleList.map(obstacle => obstacle.moveBack())
                 ship.moveBack()
-                goal.moveBack()
                 currentLevelTicker = levelTicker
                 game.addScore(10)
                 if (ship.isDead()) {
