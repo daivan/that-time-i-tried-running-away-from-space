@@ -17,14 +17,14 @@ class TextInterface {
 		//cx.drawImage(this.intro_background, 0, 0, 768, 512, 0, 0, 768, 512);
 
 		let title = "That time I tried running from space";
-		let subtitle = "Best experience in full screen mode <Enter>";
+		let subtitle = "";
 		let story1 = "The universe has imploded and you need to get as far";
 		let story2 = "away as possible!";
 		let story3 = "Avoid anything and everything to maintain your speed!";
 		let start = "Press <Space> to play";
 		let credits = "Created by: Daivan Trinh & Hakan Einarsson for js13kGames.com 2021";
 		cx.font = "30px Arial";
-		cx.fillStyle = "#000";  //<======= here
+		cx.fillStyle = "#FFF";  //<======= here
 		cx.fillText(title, 20, 270);
 		cx.font = "20px Arial";
 		cx.fillText(subtitle, 20, 320);
@@ -48,7 +48,7 @@ class TextInterface {
 
 		let credits = "Created by: Daivan Trinh & Hakan Einarsson for js13kGames.com 2021";
 		cx.font = "50px Arial";
-		cx.fillStyle = "#000";  //<======= here
+		cx.fillStyle = "#FFF";  //<======= here
 		cx.fillText(title, 20, 270);
 		cx.font = "20px Arial";
 
@@ -89,7 +89,7 @@ class TextInterface {
 		cx.fillStyle = "#FF0000";  //<======= here
 		cx.fillText(title, 40, 105);
 		cx.font = "18px Arial";
-		cx.fillStyle = "#000";  //<======= here
+		cx.fillStyle = "#FFF";  //<======= here
 		cx.fillText(subtitle1, 40, 145);
 		cx.fillText(subtitle2, 40, 180);
 		cx.fillText(start, 40, 230);
@@ -100,7 +100,7 @@ class TextInterface {
 
 		let scoreText = "Score: " + score;
 		cx.font = "12px Arial";
-		cx.fillStyle = "#000";
+		cx.fillStyle = "#FFF";
 		cx.fillText(scoreText, 530, 18);
 		
 	}

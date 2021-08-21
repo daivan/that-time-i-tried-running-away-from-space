@@ -1,4 +1,4 @@
-class Music {
+class Effects {
 
   constructor(ctx) {
     this.ctx = ctx;
@@ -36,64 +36,6 @@ class Music {
       ["d", "", "", "d"],
       ["e", "", "", ""],
       ["", "", "", "d"],
-      ["a", "", "", ""],
-      ["f", "", "", "d"],
-      ["", "", "", ""],
-      ["d", "", "", "d"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "d"],
-      ["e", "", "", ""],
-      ["", "", "", "d"],
-      ["a", "", "", ""],
-      ["f", "", "", "d"],
-      ["", "", "", ""],
-      ["d", "", "", "c"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "c"],
-      ["e", "", "", ""],
-      ["", "", "", "c"],
-      ["a", "", "", ""],
-      ["f", "", "", "c"],
-      ["", "", "", ""],
-      ["d", "", "", "c"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "c"],
-      ["e", "", "", ""],
-      ["", "", "", "c"],
-      ["a", "", "", ""],
-      ["f", "", "", "c"],
-      ["", "", "", ""],
-      ["d", "", "", "bs"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "bs"],
-      ["", "a", "", ""],
-      ["", "", "", "bs"],
-      ["", "a", "", ""],
-      ["f", "", "", "bs"],
-      ["e", "", "", ""],
-      ["d", "", "", "bs"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "bs"],
-      ["", "a", "", ""],
-      ["", "", "", "bs"],
-      ["", "a", "", ""],
-      ["f", "", "", "bs"],
-      ["e", "", "", ""],
-      ["d", "", "", "a"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "a"],
-      ["g", "", "", ""],
-      ["", "", "", "a"],
-      ["g", "", "", ""],
-      ["e", "", "", "a"],
-      ["d", "", "", ""],
-      ["d", "", "", "c"], //[kanal1,kanal2,kanal3,kanal4]
-      ["", "", "", ""],
-      ["d", "", "", "c"],
-      ["g", "", "", ""],
-      ["", "", "", "c"],
-      ["g", "", "", ""],
-      ["e", "", "", "c"],
       ["d", "", "", ""]
     ];
   }
@@ -103,7 +45,14 @@ class Music {
     if (this.ctx.state === 'suspended') {
       this.ctx.resume();
     }
-    this.scheduler();
+    /*
+    //this.scheduler();
+    this.melody.note = this.notesToPlay[this.currentNote][i];
+    this.melody.wave = "sine";
+    this.melody.octave = 1;
+    this.melody.length = this.notesToPlay[this.currentNote][i].length;
+    this.playNote(this.melody, this.nextNoteTime);
+    */
   }
 
   playMove() {

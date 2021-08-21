@@ -21,8 +21,9 @@ cx = canvas.getContext('2d');
 let game = new Game();
 let gameState = new GameState();
 let textInterface = new TextInterface();
+let background = new Background(cx);
 let music = new Music(audioCtx)
-
+let effects = new Effects(audioCtx)
 let obstacleList = []
 
 let ship = new Ship(cx);
@@ -79,7 +80,8 @@ function gameLoop() {
 
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
-        music.play();
+        //music.play();
+        effects.play();
 
         gameState.state = 'playing';
     }
@@ -216,8 +218,11 @@ function gameLoop() {
         // clear everything on the screen
         cx.clearRect(0, 0, cw, ch);
 
-        // RENDER THE TEXT DISPLAY
 
+
+        
+        // RENDER THE BACKGROUND
+        background.render();
 
         // Stage
         if (gameState.state === 'start_menu') {
