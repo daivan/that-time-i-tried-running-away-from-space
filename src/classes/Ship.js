@@ -4,13 +4,13 @@ class Ship
 	constructor(context)
 	{
 		let img_background = new Image();
-		img_background.src = 'assets/images/collection.png';
+		img_background.src = 'assets/images/spritesheet.png';
 		this.context=context;
 		this.image=img_background;
 		this.position_x = 64;
 		this.position_y = 64;
-		this.current_animation_frame = 2;
-		this.max_animation_frame = 4;
+		this.current_animation_frame = 1;
+		this.max_animation_frame = 3;
 		this.current_frame_rate = 20;
 		this.max_frame_rate = 10;
 		this.movable = true;
@@ -63,7 +63,7 @@ class Ship
 	render()
 	{
 		let animationFrame = this.getAnimationFrame(this.current_animation_frame);
-		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 64, 64, this.position_x, this.position_y, 64, 64);
+		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 32, 32, this.position_x, this.position_y, 32, 32);
 		
 		this.current_frame_rate-=1
 		if(this.current_frame_rate==0){
@@ -89,11 +89,11 @@ class Ship
 		if(frame == 0){
 			return [0,0]
 		}else if(frame == 1){
-			return [64,0]
+			return [32,0]
 		}else if(frame == 2){
-			return [128,0]
-		}else if(frame == 3){
-			return [196,0]
+			return [64,0]
+		}else{
+			return [0,0]
 		}
 
 	}
