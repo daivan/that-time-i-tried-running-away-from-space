@@ -63,7 +63,7 @@ class Ship
 	render()
 	{
 		let animationFrame = this.getAnimationFrame(this.current_animation_frame);
-		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 32, 32, this.position_x, this.position_y, 32, 32);
+		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 64, 64, this.position_x, this.position_y, 64, 64);
 		
 		this.current_frame_rate-=1
 		if(this.current_frame_rate==0){
@@ -89,9 +89,9 @@ class Ship
 		if(frame == 0){
 			return [0,0]
 		}else if(frame == 1){
-			return [32,0]
-		}else if(frame == 2){
 			return [64,0]
+		}else if(frame == 2){
+			return [128,0]
 		}else{
 			return [0,0]
 		}

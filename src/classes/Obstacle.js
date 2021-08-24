@@ -22,7 +22,7 @@ class Obstacle {
 
 
         let animationFrame = this.getAnimationFrame(this.current_animation_frame);
-		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 32, 32, this.x, this.y, 32, 32);
+		this.context.drawImage(this.image, animationFrame[0], animationFrame[1], 64, 64, this.x, this.y, 64, 64);
 		
 		this.current_frame_rate-=1
 		if(this.current_frame_rate==0){
@@ -46,13 +46,13 @@ class Obstacle {
 	}
 	getAnimationFrame(frame){
 		if(frame == 0){
-			return [0,32]
+			return [0,64]
 		}else if(frame == 1){
-			return [32,32]
+			return [64,64]
 		}else if(frame == 2){
-			return [64,32]
+			return [128,64]
 		}else{
-			return [0,32]
+			return [0,64]
 		}
 
 	}
