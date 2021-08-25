@@ -47,24 +47,42 @@ class Obstacle {
 			}
 		}
 		
-		if(this.showDamageAnimation == true){
-			this.context.fill();
+		if(this.lootType == 'oxygen'){
+			this.context.fillStyle = "#0000FF";
+			this.context.shadowColor = "#0000FF";
 			this.context.beginPath();
-			this.context.fillStyle = "#FFFF00";
 			this.context.shadowBlur = 5;
+			this.context.fillStyle = "#0000FF";
+			this.context.shadowColor = "#0000FF";
+			this.context.arc(this.x+15, this.y+30, 5, 25, 50, false);
+			this.context.fill();
+			this.context.closePath();
+			this.context.shadowBlur = 0;
+			let title = "oxygen"
+			this.context.fillText(title, this.x+18, this.y+42);
+		}
+
+		if(this.showDamageAnimation == true){
+			this.context.fillStyle = "#FFFF00";
 			this.context.shadowColor = "#FF0000";
-			//this.context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, false);
+			this.context.beginPath();
+			this.context.shadowBlur = 5;
+			this.context.fillStyle = "#FFFF00";
+			this.context.shadowColor = "#FF0000";
 			this.context.arc(this.x+32, this.y+32, 20, 50, 100, false);
 			this.context.fill();
 			this.context.closePath();
 			this.context.shadowBlur = 0;
 			this.showDamageAnimation = false;
 		}
+
 		if(this.currentHealth!=this.maxHealth){
-			cx.fillStyle = 'rgba(255,0,0,1)';
+			this.context.fillStyle = 'rgba(255,0,0,1)';
 			let currentHealth = 64/(this.maxHealth/this.currentHealth)
-			cx.fillRect(this.x,this.y+60,currentHealth,4);
+			this.context.fillRect(this.x,this.y+60,currentHealth,4);
 		}
+
+
 
 					
 	}
