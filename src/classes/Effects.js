@@ -42,8 +42,6 @@ class Effects {
 
 
   playMove() {
-    console.log("Should be playing a move effect");
-
   }
 
   nextNote() {
