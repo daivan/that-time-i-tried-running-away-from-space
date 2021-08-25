@@ -108,11 +108,12 @@ class Ship
 			let obstacleLocation = obstacle.getLocation()
 			if(obstacleLocation[0] == 64 && obstacleLocation[1] == this.position_y && this.position_x <= 0){
 				this.dead = true;
+			}else if(obstacleLocation[1] == this.position_y && this.position_x+64==obstacleLocation[0])
+			{
+				this.position_x = this.position_x - 64
 			}
 		});
-		if(this.position_x != 0){
-			this.position_x = this.position_x - 64
-		}
+
 		
 	}
 

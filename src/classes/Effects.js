@@ -40,23 +40,10 @@ class Effects {
     ];
   }
 
-  play() {
-    this.isPlaying = true;
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-    /*
-    //this.scheduler();
-    this.melody.note = this.notesToPlay[this.currentNote][i];
-    this.melody.wave = "sine";
-    this.melody.octave = 1;
-    this.melody.length = this.notesToPlay[this.currentNote][i].length;
-    this.playNote(this.melody, this.nextNoteTime);
-    */
-  }
 
   playMove() {
-    console.log("");
+    console.log("Should be playing a move effect");
+
   }
 
   nextNote() {

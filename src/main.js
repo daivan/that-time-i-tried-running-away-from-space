@@ -6,6 +6,12 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
 }
 
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
+let music = new Music(audioCtx)
+let effects = new Effects(audioCtx)
+
+
 let canvas = document.getElementById('canvas'),
     cw = canvas.width,
     ch = canvas.height,
@@ -76,12 +82,9 @@ function gameLoop() {
 
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioCtx = new AudioContext();
-        let music = new Music(audioCtx)
-        music.play();
-        //let effects = new Effects(audioCtx)
-        //effects.play();
+
+        //music.play();
+        effects.playMove();
 
         gameState.state = 'playing';
     }
@@ -97,6 +100,7 @@ function gameLoop() {
     // Press Space in main menu
     if (state.pressedKeys.up) {
 
+        effects.playMove();
         shipLocation = ship.getPosition()
         // if ship is in the top
         if (shipLocation[1] == 0) {
