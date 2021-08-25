@@ -17,6 +17,7 @@ class Ship
 		this.current_movable_speed = 5;
 		this.max_movable_speed = 5;
 		this.dead = false;
+		this.damage = 2;
 
 	}
 
@@ -117,7 +118,13 @@ class Ship
 		
 	}
 
-	
+	attack(obstacle){
+		if (this.movable){
+			obstacle.takeDamage(this.damage)
+			this.movable = false;
+		}
+		
+	}
 	vibrate(){
 
 	}	

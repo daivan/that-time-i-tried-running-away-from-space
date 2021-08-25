@@ -15,6 +15,9 @@ class Obstacle {
         this.xFrame = 64;
         this.yFrame = 192;
         this.name = '';
+		this.health = 20;
+		this.dead = false;
+		this.showDamageAnimation = false;
     }
 
 
@@ -41,7 +44,20 @@ class Obstacle {
 			}
 		}
 		
-		
+		if(this.showDamageAnimation == true){
+			this.context.fill();
+			this.context.beginPath();
+			this.context.fillStyle = "#FFFF00";
+			this.context.shadowBlur = 5;
+			this.context.shadowColor = "#FF0000";
+			//this.context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, false);
+			this.context.arc(this.x+32, this.y+32, 20, 50, 100, false);
+			this.context.fill();
+			this.context.closePath();
+			this.context.shadowBlur = 0;
+			this.showDamageAnimation = false;
+		}
+
 					
 	}
 	getAnimationFrame(frame){
@@ -64,4 +80,17 @@ class Obstacle {
     getLocation(){
         return [this.x, this.y]
     }
+
+	takeDamage(damage){
+		this.showDamageAnimation = true;
+		this.health -= damage
+		if(this.health<=0){
+			this.destroy()
+		}
+	}
+
+	destroy(){
+		this.dead = true;
+	}
+
 }

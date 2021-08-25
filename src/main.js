@@ -31,8 +31,8 @@ let obstacleList = []
 
 let ship = new Ship(cx);
 
-let currentLevelTicker = 100;
-let levelTicker = 100;
+let currentLevelTicker = 50;
+let levelTicker = 50;
 
 
 let state = {
@@ -100,7 +100,6 @@ function gameLoop() {
     // Press Space in main menu
     if (state.pressedKeys.up) {
 
-        effects.playMove();
         shipLocation = ship.getPosition()
         // if ship is in the top
         if (shipLocation[1] == 0) {
@@ -109,12 +108,13 @@ function gameLoop() {
 
             shipLocation[1] -= 64
             isUpEmpty = true;
+            currentObstacle = []
             obstacleList.map(obstacle => {
                 obstacleLocation = obstacle.getLocation()
                 if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                     isUpEmpty = false;
+                    currentObstacle = obstacle;
                 }
-
             }
 
             );
@@ -122,7 +122,10 @@ function gameLoop() {
             if (isUpEmpty) {
                 ship.moveUp();
             } else {
-                ship.vibrate();
+                ship.attack(currentObstacle);
+                if(currentObstacle.dead === true){
+                    obstacleList = arrayRemove(obstacleList, currentObstacle);
+                }
             }
         }
 
@@ -142,6 +145,7 @@ function gameLoop() {
                 obstacleLocation = obstacle.getLocation()
                 if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                     isUpEmpty = false;
+                    currentObstacle = obstacle;
                 }
 
             }
@@ -151,7 +155,10 @@ function gameLoop() {
             if (isUpEmpty) {
                 ship.moveDown();
             } else {
-                ship.vibrate();
+                ship.attack(currentObstacle);
+                if(currentObstacle.dead === true){
+                    obstacleList = arrayRemove(obstacleList, currentObstacle);
+                }
             }
         }
 
@@ -170,6 +177,7 @@ function gameLoop() {
                 obstacleLocation = obstacle.getLocation()
                 if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                     isUpEmpty = false;
+                    currentObstacle = obstacle;
                 }
 
             }
@@ -179,7 +187,10 @@ function gameLoop() {
             if (isUpEmpty) {
                 ship.moveLeft();
             } else {
-                ship.vibrate();
+                ship.attack(currentObstacle);
+                if(currentObstacle.dead === true){
+                    obstacleList = arrayRemove(obstacleList, currentObstacle);
+                }
             }
         }
     }
@@ -197,6 +208,7 @@ function gameLoop() {
                 obstacleLocation = obstacle.getLocation()
                 if (obstacleLocation[0] == shipLocation[0] && obstacleLocation[1] == shipLocation[1]) {
                     isUpEmpty = false;
+                    currentObstacle = obstacle;
                 }
 
             }
@@ -206,7 +218,10 @@ function gameLoop() {
             if (isUpEmpty) {
                 ship.moveRight();
             } else {
-                ship.vibrate();
+                ship.attack(currentObstacle);
+                if(currentObstacle.dead === true){
+                    obstacleList = arrayRemove(obstacleList, currentObstacle);
+                }
             }
         }
     }
@@ -292,5 +307,13 @@ function loadImage(url) {
         let imageObj = new Image();
         imageObj.onload = () => fulfill(imageObj);
         imageObj.src = url;
+    });
+}
+
+
+function arrayRemove(arr, value) { 
+    
+    return arr.filter(function(ele){ 
+        return ele != value; 
     });
 }
