@@ -244,8 +244,8 @@ function gameLoop() {
             obstacleList.map(obstacle => obstacle.render())
             currentLevelTicker -= 1
             if (currentLevelTicker < 0) {
+                ship.moveBack(obstacleList)
                 obstacleList.map(obstacle => obstacle.moveBack())
-                ship.moveBack()
                 currentLevelTicker = levelTicker
                 game.addScore(10)
                 if (ship.isDead()) {
@@ -253,7 +253,7 @@ function gameLoop() {
                 }
 
                 let obstacle = new Obstacle(cx);
-                obstacle.x = 640
+                obstacle.x = 704
                 obstacle.y = Math.floor(Math.random() * 8) * 64;
                 obstacleList.push(obstacle)
             }

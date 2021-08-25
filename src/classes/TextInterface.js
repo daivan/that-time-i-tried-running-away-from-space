@@ -4,17 +4,11 @@ class TextInterface {
 		let img_background = new Image();
 		img_background.src = 'assets/images/collection.png';
 		this.image=img_background;
-		let intro_background = new Image();
-		intro_background.src = 'assets/images/intro_background.png';
-		this.intro_background = intro_background;
+
 	}
 
 
 	renderStart() {
-
-
-
-		//cx.drawImage(this.intro_background, 0, 0, 768, 512, 0, 0, 768, 512);
 
 		let title = "That time I tried running away from space";
 		let subtitle = "";

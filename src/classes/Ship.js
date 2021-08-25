@@ -102,12 +102,18 @@ class Ship
 		return [this.position_x,this.position_y]
 	}
 
-	moveBack(){
-		
-		if(this.position_x <= 0){
-			this.dead = true;
+	moveBack(obstacleList){
+		// Check if an obstacle is infront of you and if you are on the left edge
+		obstacleList.map(obstacle =>{
+			let obstacleLocation = obstacle.getLocation()
+			if(obstacleLocation[0] == 64 && obstacleLocation[1] == this.position_y && this.position_x <= 0){
+				this.dead = true;
+			}
+		});
+		if(this.position_x != 0){
+			this.position_x = this.position_x - 64
 		}
-		this.position_x = this.position_x - 64
+		
 	}
 
 	
