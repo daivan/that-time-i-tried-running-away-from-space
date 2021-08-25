@@ -124,7 +124,9 @@ function gameLoop() {
             } else {
                 ship.attack(currentObstacle);
                 if(currentObstacle.dead === true){
+                    game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
+                    
                 }
             }
         }
@@ -157,6 +159,7 @@ function gameLoop() {
             } else {
                 ship.attack(currentObstacle);
                 if(currentObstacle.dead === true){
+                    game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }
@@ -189,6 +192,7 @@ function gameLoop() {
             } else {
                 ship.attack(currentObstacle);
                 if(currentObstacle.dead === true){
+                    game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }
@@ -220,6 +224,7 @@ function gameLoop() {
             } else {
                 ship.attack(currentObstacle);
                 if(currentObstacle.dead === true){
+                    game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }

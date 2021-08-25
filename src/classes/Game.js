@@ -12,6 +12,14 @@ class Game {
       this.score+=addScore;
   }
 
+    getObstacleReward(obstacle){
+        if(obstacle.lootType=='oxygen'){
+			this.currentOxygen += obstacle.lootAmount;
+            if(this.currentOxygen>this.maxOxygen){
+                this.currentOxygen = this.maxOxygen;
+            }
+		}
+    }
     getScore()
     {
         return this.score;

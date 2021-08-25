@@ -125,7 +125,5 @@ class Ship
 		}
 		
 	}
-	vibrate(){
 
-	}	
 }

@@ -15,9 +15,12 @@ class Obstacle {
         this.xFrame = 64;
         this.yFrame = 192;
         this.name = '';
-		this.health = 20;
+		this.currentHealth = 20;
+		this.maxHealth = 20;
 		this.dead = false;
 		this.showDamageAnimation = false;
+		this.lootType = 'oxygen';
+		this.lootAmount = 10;
     }
 
 
@@ -57,6 +60,11 @@ class Obstacle {
 			this.context.shadowBlur = 0;
 			this.showDamageAnimation = false;
 		}
+		if(this.currentHealth!=this.maxHealth){
+			cx.fillStyle = 'rgba(255,0,0,1)';
+			let currentHealth = 64/(this.maxHealth/this.currentHealth)
+			cx.fillRect(this.x,this.y+60,currentHealth,4);
+		}
 
 					
 	}
@@ -83,8 +91,8 @@ class Obstacle {
 
 	takeDamage(damage){
 		this.showDamageAnimation = true;
-		this.health -= damage
-		if(this.health<=0){
+		this.currentHealth -= damage
+		if(this.currentHealth<=0){
 			this.destroy()
 		}
 	}
