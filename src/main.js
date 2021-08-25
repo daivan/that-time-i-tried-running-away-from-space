@@ -271,7 +271,8 @@ function gameLoop() {
 
 // get images
 Promise.all([
-    loadImage("assets/images/intro_background.png"),
+    loadImage("assets/images/collection.png"),
+    loadImage("assets/images/spritesheet.png"),
 ])
     .then(() => {
         // draw images to canvas
