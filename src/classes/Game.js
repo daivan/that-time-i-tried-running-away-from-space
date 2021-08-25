@@ -2,6 +2,8 @@ class Game {
 
   constructor() {
   	this.score = 0;
+    this.currentOxygen = 200;
+    this.maxOxygen = 200;
   	//this.nextTile = 1;
   }
 
@@ -15,9 +17,19 @@ class Game {
         return this.score;
     }
 
+    getOxygenArray()
+    {
+        return [this.currentOxygen, this.maxOxygen];
+    }
+
+    removeOxygen(oxygenToRemove){
+        this.currentOxygen-=oxygenToRemove;
+    }
     resetGame()
     {
         this.score = 0;
+        this.maxOxygen = 200;
+        this.currentOxygen = 200;
     }
 
 	makeMove(event)

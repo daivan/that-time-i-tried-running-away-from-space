@@ -250,10 +250,12 @@ function gameLoop() {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
             score = game.getScore();
+            oxygenArray = game.getOxygenArray();
             textInterface.renderDead(score);
         } else if (gameState.state === 'playing') {
             score = game.getScore();
-            textInterface.renderInfoPanel(score);
+            oxygenArray = game.getOxygenArray();
+            textInterface.renderInfoPanel(score, oxygenArray);
 
 
 
@@ -267,6 +269,7 @@ function gameLoop() {
                 obstacleList.map(obstacle => obstacle.moveBack())
                 currentLevelTicker = levelTicker
                 game.addScore(10)
+                game.removeOxygen(1)
                 if (ship.isDead()) {
                     gameState.state = 'dead';
                 }

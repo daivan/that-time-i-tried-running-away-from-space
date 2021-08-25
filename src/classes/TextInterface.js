@@ -74,12 +74,14 @@ class TextInterface {
 
 	}
 
-	renderInfoPanel(score){
+	renderInfoPanel(score, oxygenArray){
 
-		let scoreText = "Score: " + score;
+		let scoreText = "Distance: " + score;
+		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
 		cx.font = "12px Arial";
 		cx.fillStyle = "#FFF";
 		cx.fillText(scoreText, 8, 18);
+		cx.fillText(oxygenText, 8, 40);
 		
 	}
 }
