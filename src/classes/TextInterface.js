@@ -16,11 +16,11 @@ class TextInterface {
 
 		//cx.drawImage(this.intro_background, 0, 0, 768, 512, 0, 0, 768, 512);
 
-		let title = "That time I tried running from space";
+		let title = "That time I tried running away from space";
 		let subtitle = "";
-		let story1 = "The universe has imploded and you need to get as far";
-		let story2 = "away as possible!";
-		let story3 = "Avoid anything and everything to maintain your speed!";
+		let story1 = "";
+		let story2 = "";
+		let story3 = "Avoid the asteroids!";
 		let start = "Press <Space> to play";
 		let credits = "Created by: Daivan Trinh & Hakan Einarsson for js13kGames.com 2021";
 		cx.font = "30px Arial";
@@ -61,35 +61,23 @@ class TextInterface {
 
 	}
 
-	renderDead(){
+	renderDead(score){
 
 		cx.fillStyle = 'rgba(225,225,225,0.8)';
 		cx.fillRect(0,0,768,512);
 
-
-		let header = "Game over";
 		let title = "You died!";
-		let subtitle1 = "The resource you are looking for might have been removed...";
-		let subtitle2 = "Or maybe the server is just bad at finding your file.";
+		let subtitle1 = "Your final score was:";
+		let subtitle2 = score;
 
 		let start = "Press <space> to play again";
 
 		cx.font = "30px Arial";
 
-
-		cx.fillStyle = 'rgba(82,84,82,1)';
-		cx.fillRect(0,0,768,50);
-
-		cx.fillStyle = 'rgba(255,255,255,1)';
-		cx.fillRect(20,60,728,200);
-
-		cx.font = "30px Arial";
-		cx.fillStyle = "#FFF";  //<======= here
-		cx.fillText(header, 10, 40);
 		cx.fillStyle = "#FF0000";  //<======= here
 		cx.fillText(title, 40, 105);
 		cx.font = "18px Arial";
-		cx.fillStyle = "#FFF";  //<======= here
+		cx.fillStyle = "#000";  //<======= here
 		cx.fillText(subtitle1, 40, 145);
 		cx.fillText(subtitle2, 40, 180);
 		cx.fillText(start, 40, 230);

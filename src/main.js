@@ -230,7 +230,8 @@ function gameLoop() {
         } else if (gameState.state === 'end') {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
-            textInterface.renderDead();
+            score = game.getScore();
+            textInterface.renderDead(score);
         } else if (gameState.state === 'playing') {
             score = game.getScore();
             textInterface.renderInfoPanel(score);
