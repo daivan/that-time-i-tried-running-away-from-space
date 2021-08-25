@@ -14,7 +14,6 @@ class Background {
 
         this.spawnTime -= 1
         if(this.spawnTime==0){
-            console.log('Spawning star');
             let obstacle = new Star(this.context);
             this.starList.push(obstacle)
             this.spawnTime = 30

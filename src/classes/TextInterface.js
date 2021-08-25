@@ -83,7 +83,7 @@ class TextInterface {
 		let scoreText = "Score: " + score;
 		cx.font = "12px Arial";
 		cx.fillStyle = "#FFF";
-		cx.fillText(scoreText, 530, 18);
+		cx.fillText(scoreText, 8, 18);
 		
 	}
 }

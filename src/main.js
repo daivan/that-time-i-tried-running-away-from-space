@@ -1,6 +1,5 @@
 let vendors = ['webkit', 'moz'];
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+
 for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
     window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
     window.cancelAnimationFrame =
@@ -22,15 +21,12 @@ let game = new Game();
 let gameState = new GameState();
 let textInterface = new TextInterface();
 let background = new Background(cx);
-let music = new Music(audioCtx)
-let effects = new Effects(audioCtx)
 let obstacleList = []
 
 let ship = new Ship(cx);
 
 let currentLevelTicker = 100;
 let levelTicker = 100;
-//let music = new Music();
 
 
 let state = {
@@ -80,8 +76,12 @@ function gameLoop() {
 
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
-        //music.play();
-        effects.play();
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+        let music = new Music(audioCtx)
+        music.play();
+        //let effects = new Effects(audioCtx)
+        //effects.play();
 
         gameState.state = 'playing';
     }
