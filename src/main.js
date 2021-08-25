@@ -270,6 +270,9 @@ function gameLoop() {
                 currentLevelTicker = levelTicker
                 game.addScore(10)
                 game.removeOxygen(1)
+                if(game.over() == true){
+                    gameState.state = 'dead';
+                }
                 if (ship.isDead()) {
                     gameState.state = 'dead';
                 }

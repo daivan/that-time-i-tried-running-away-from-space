@@ -22,6 +22,14 @@ class Game {
         return [this.currentOxygen, this.maxOxygen];
     }
 
+    over()
+    {
+        if(this.currentOxygen<=0){
+            return true;
+        }
+        return false;
+    }
+
     removeOxygen(oxygenToRemove){
         this.currentOxygen-=oxygenToRemove;
     }
