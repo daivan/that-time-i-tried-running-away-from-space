@@ -1,10 +1,6 @@
 class TextInterface {
 
 	constructor() {
-		let img_background = new Image();
-		img_background.src = 'assets/images/collection.png';
-		this.image=img_background;
-
 	}
 
 

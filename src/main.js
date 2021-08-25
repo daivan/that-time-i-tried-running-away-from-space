@@ -276,7 +276,6 @@ function gameLoop() {
 
 // get images
 Promise.all([
-    loadImage("assets/images/collection.png"),
     loadImage("assets/images/spritesheet.png"),
 ])
     .then(() => {
