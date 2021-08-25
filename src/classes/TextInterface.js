@@ -82,6 +82,7 @@ class TextInterface {
 		cx.fillStyle = "#FFF";
 		cx.fillText(scoreText, 8, 18);
 		// show red text if oxygen is low
+		cx.fillStyle = "#0000FF";
 		if (oxygenArray[0]<=15){
 			cx.fillStyle = "#FF0000";
 		}

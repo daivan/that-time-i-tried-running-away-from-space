@@ -19,8 +19,13 @@ class Obstacle {
 		this.maxHealth = 20;
 		this.dead = false;
 		this.showDamageAnimation = false;
-		this.lootType = 'oxygen';
-		this.lootAmount = 10;
+		this.lootType = 'nothing';
+		this.lootAmount = 0;
+		if(Math.floor(Math.random() * 100)>85){
+			this.lootType = 'oxygen';
+			this.lootAmount = 10;
+		}
+		
     }
 
 
@@ -47,20 +52,7 @@ class Obstacle {
 			}
 		}
 		
-		if(this.lootType == 'oxygen'){
-			this.context.fillStyle = "#0000FF";
-			this.context.shadowColor = "#0000FF";
-			this.context.beginPath();
-			this.context.shadowBlur = 5;
-			this.context.fillStyle = "#0000FF";
-			this.context.shadowColor = "#0000FF";
-			this.context.arc(this.x+15, this.y+30, 5, 25, 50, false);
-			this.context.fill();
-			this.context.closePath();
-			this.context.shadowBlur = 0;
-			let title = "oxygen"
-			this.context.fillText(title, this.x+18, this.y+42);
-		}
+
 
 		if(this.showDamageAnimation == true){
 			this.context.fillStyle = "#FFFF00";
@@ -80,6 +72,21 @@ class Obstacle {
 			this.context.fillStyle = 'rgba(255,0,0,1)';
 			let currentHealth = 64/(this.maxHealth/this.currentHealth)
 			this.context.fillRect(this.x,this.y+60,currentHealth,4);
+
+			if(this.lootType == 'oxygen'){
+				this.context.fillStyle = "#0000FF";
+				this.context.shadowColor = "#0000FF";
+				this.context.beginPath();
+				this.context.shadowBlur = 5;
+				this.context.fillStyle = "#0000FF";
+				this.context.shadowColor = "#0000FF";
+				this.context.arc(this.x+15, this.y+30, 5, 25, 50, false);
+				this.context.fill();
+				this.context.closePath();
+				this.context.shadowBlur = 0;
+				let title = "oxygen"
+				this.context.fillText(title, this.x+18, this.y+42);
+			}
 		}
 
 
