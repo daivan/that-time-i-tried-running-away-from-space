@@ -28,6 +28,16 @@ class TextInterface {
 		cx.fillText(credits, 20, 500);
 	}
 
+	renderMap() {
+
+		let title = "Select destination";
+		let start = "Press <Enter> to select the destination";
+		cx.font = "30px Arial";
+		cx.fillStyle = "#FFF";  //<======= here
+		cx.fillText(title, 20, 270);
+		cx.fillText(start, 20, 450);
+		
+	}
 	
 	renderEnd() {
 		let title = "The End";
@@ -74,10 +84,11 @@ class TextInterface {
 
 	}
 
-	renderInfoPanel(score, oxygenArray){
+	renderInfoPanel(score, oxygenArray, distanceArray){
 
 		let scoreText = "Distance: " + score;
 		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
+		let distanceText = "Destination: " + distanceArray[0] + "/"+distanceArray[1];
 		cx.font = "12px Arial";
 		cx.fillStyle = "#FFF";
 		cx.fillText(scoreText, 8, 18);
@@ -87,6 +98,8 @@ class TextInterface {
 			cx.fillStyle = "#FF0000";
 		}
 		cx.fillText(oxygenText, 8, 40);
+		cx.fillStyle = "#00FFFF";
+		cx.fillText(distanceText, 8, 62);
 		
 	}
 }

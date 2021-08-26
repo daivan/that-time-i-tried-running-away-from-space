@@ -2,6 +2,8 @@ class Game {
 
   constructor() {
   	this.score = 0;
+    this.currentDistance = 0;
+    this.maxDistance = 100;
     this.currentOxygen = 200;
     this.maxOxygen = 200;
   	//this.nextTile = 1;
@@ -25,11 +27,25 @@ class Game {
         return this.score;
     }
 
+    addDistance(distance){
+        this.currentDistance+=distance;
+    }
+
+    completeLevel(){
+        if(this.currentDistance > this.maxDistance){
+            return true;
+        }
+        return false;
+    }
+
     getOxygenArray()
     {
         return [this.currentOxygen, this.maxOxygen];
     }
-
+    getDistanceArray()
+    {
+        return [this.currentDistance, this.maxDistance];
+    }
     over()
     {
         if(this.currentOxygen<=0){
@@ -48,6 +64,13 @@ class Game {
         this.currentOxygen = 200;
     }
 
+    setLevel()
+    {
+        this.currentDistance = 0;
+        this.maxDistance = 10;
+        this.maxOxygen = 200;
+        this.currentOxygen = 200;
+    }
 	makeMove(event)
 	{
 	    let mouseX = event.pageX;

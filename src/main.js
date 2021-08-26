@@ -37,6 +37,7 @@ let levelTicker = 50;
 
 let state = {
     pressedKeys: {
+        enter: false,
         space: false,
         left: false,
         right: false,
@@ -46,7 +47,7 @@ let state = {
 };
 
 let keyMap = {
-    'Enter': 'we tryin',
+    'Enter': 'enter',
     'ArrowRight': 'right',
     'ArrowLeft': 'left',
     'ArrowUp': 'up',
@@ -86,6 +87,10 @@ function gameLoop() {
         //music.play();
         effects.playMove();
 
+        gameState.state = 'map';
+    }
+    if (state.pressedKeys.enter && gameState.state === 'map') {
+        game.setLevel()
         gameState.state = 'playing';
     }
     // Press Space if dead
@@ -123,10 +128,10 @@ function gameLoop() {
                 ship.moveUp();
             } else {
                 ship.attack(currentObstacle);
-                if(currentObstacle.dead === true){
+                if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
-                    
+
                 }
             }
         }
@@ -158,7 +163,7 @@ function gameLoop() {
                 ship.moveDown();
             } else {
                 ship.attack(currentObstacle);
-                if(currentObstacle.dead === true){
+                if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -191,7 +196,7 @@ function gameLoop() {
                 ship.moveLeft();
             } else {
                 ship.attack(currentObstacle);
-                if(currentObstacle.dead === true){
+                if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -223,7 +228,7 @@ function gameLoop() {
                 ship.moveRight();
             } else {
                 ship.attack(currentObstacle);
-                if(currentObstacle.dead === true){
+                if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -244,13 +249,15 @@ function gameLoop() {
 
 
 
-        
+
         // RENDER THE BACKGROUND
         background.render();
 
         // Stage
         if (gameState.state === 'start_menu') {
             textInterface.renderStart();
+        } else if (gameState.state === 'map') {
+            textInterface.renderMap();
         } else if (gameState.state === 'end') {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
@@ -260,7 +267,8 @@ function gameLoop() {
         } else if (gameState.state === 'playing') {
             score = game.getScore();
             oxygenArray = game.getOxygenArray();
-            textInterface.renderInfoPanel(score, oxygenArray);
+            distanceArray = game.getDistanceArray();
+            textInterface.renderInfoPanel(score, oxygenArray, distanceArray);
 
 
 
@@ -275,11 +283,15 @@ function gameLoop() {
                 currentLevelTicker = levelTicker
                 game.addScore(10)
                 game.removeOxygen(1)
-                if(game.over() == true){
+                if (game.over() == true) {
                     gameState.state = 'dead';
                 }
                 if (ship.isDead()) {
                     gameState.state = 'dead';
+                }
+                game.addDistance(1);
+                if (game.completeLevel()) {
+                    gameState.state = 'map';
                 }
 
                 let obstacle = new Obstacle(cx);
@@ -322,9 +334,9 @@ function loadImage(url) {
 }
 
 
-function arrayRemove(arr, value) { 
-    
-    return arr.filter(function(ele){ 
-        return ele != value; 
+function arrayRemove(arr, value) {
+
+    return arr.filter(function (ele) {
+        return ele != value;
     });
 }
