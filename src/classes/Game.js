@@ -1,116 +1,109 @@
 class Game {
 
-  constructor() {
-  	this.score = 0;
-    this.currentDistance = 0;
-    this.maxDistance = 100;
-    this.currentOxygen = 200;
-    this.maxOxygen = 200;
-  	//this.nextTile = 1;
-  }
+    constructor() {
+        this.score = 0;
+        this.currentLevel = 0;
+        this.currentDistance = 0;
+        this.maxDistance = 100;
+        this.currentOxygen = 200;
+        this.maxOxygen = 200;
+        //this.nextTile = 1;
+    }
 
-  addScore(addScore)
-  {
-      this.score+=addScore;
-  }
+    addScore(addScore) {
+        this.score += addScore;
+    }
 
-    getObstacleReward(obstacle){
-        if(obstacle.lootType=='oxygen'){
-			this.currentOxygen += obstacle.lootAmount;
-            if(this.currentOxygen>this.maxOxygen){
+    getObstacleReward(obstacle) {
+        if (obstacle.lootType == 'oxygen') {
+            this.currentOxygen += obstacle.lootAmount;
+            if (this.currentOxygen > this.maxOxygen) {
                 this.currentOxygen = this.maxOxygen;
             }
-		}
+        }
     }
-    getScore()
-    {
+    getScore() {
         return this.score;
     }
 
-    addDistance(distance){
-        this.currentDistance+=distance;
+    addDistance(distance) {
+        this.currentDistance += distance;
     }
 
-    completeLevel(){
-        if(this.currentDistance > this.maxDistance){
+    completeLevel() {
+        if (this.currentDistance > this.maxDistance) {
             return true;
         }
         return false;
     }
 
-    getOxygenArray()
-    {
+    getOxygenArray() {
         return [this.currentOxygen, this.maxOxygen];
     }
-    getDistanceArray()
-    {
+    getDistanceArray() {
         return [this.currentDistance, this.maxDistance];
     }
-    over()
-    {
-        if(this.currentOxygen<=0){
+    over() {
+        if (this.currentOxygen <= 0) {
             return true;
         }
         return false;
     }
 
-    removeOxygen(oxygenToRemove){
-        this.currentOxygen-=oxygenToRemove;
+    removeOxygen(oxygenToRemove) {
+        this.currentOxygen -= oxygenToRemove;
     }
-    resetGame()
-    {
+    resetGame() {
         this.score = 0;
         this.maxOxygen = 200;
         this.currentOxygen = 200;
     }
 
-    setLevel()
-    {
+    setLevel() {
+        this.currentLevel+=1;
         this.currentDistance = 0;
         this.maxDistance = 10;
         this.maxOxygen = 200;
         this.currentOxygen = 200;
     }
-	makeMove(event)
-	{
-	    let mouseX = event.pageX;
-	    let mouseY = event.pageY;
+    makeMove(event) {
+        let mouseX = event.pageX;
+        let mouseY = event.pageY;
 
-	    if(gameState.state === 'inGame' && this.clickWithinArea(mouseX, mouseY)){
+        if (gameState.state === 'inGame' && this.clickWithinArea(mouseX, mouseY)) {
             gameState.movesLeft -= 1;
             gameState.checkGameOver();
             game.changeTile(mouseX, mouseY);
             game.changeNextTile();
-		}
-	}
-	changeNextTile(){
-      this.nextTile = Math.floor(Math.random() * 9) + 1;
-      /*
-        if(this.nextTile===9){
-            this.nextTile = 1;
-        }else{
-            this.nextTile+=1;
         }
-
-       */
+    }
+    changeNextTile() {
+        this.nextTile = Math.floor(Math.random() * 9) + 1;
+        /*
+          if(this.nextTile===9){
+              this.nextTile = 1;
+          }else{
+              this.nextTile+=1;
+          }
+  
+         */
     }
 
-	clickWithinArea(mouseX, mouseY)
-    {
-        if(mouseX > 72 && mouseY > 72 && mouseX < 456 && mouseY < 456){
+    clickWithinArea(mouseX, mouseY) {
+        if (mouseX > 72 && mouseY > 72 && mouseX < 456 && mouseY < 456) {
             return true;
         }
         return false;
     }
 
-	   selectedTile(mouseX, mouseY){
-	    // - 8 is because of the canvas margin
-        let x = (mouseX-8) / 64;
-        let y = (mouseY-8) / 64;
+    selectedTile(mouseX, mouseY) {
+        // - 8 is because of the canvas margin
+        let x = (mouseX - 8) / 64;
+        let y = (mouseY - 8) / 64;
         return [Math.floor(y), Math.floor(x)];
     }
 
-    changeTile(mouseX, mouseY){
+    changeTile(mouseX, mouseY) {
         let selectedTiles = this.selectedTile(mouseX, mouseY);
 
         gameState.map[selectedTiles[0]][selectedTiles[1]] = this.nextTile;
@@ -118,19 +111,18 @@ class Game {
         gameState.checkLevelComplete();
     }
 
-	update()
-	{
+    update() {
 
-		Background.renderGamePanels();
+        Background.renderGamePanels();
 
-		Background.render();
+        Background.render();
 
 
-		requests.map(request => request.render());
+        requests.map(request => request.render());
 
-		goals.map(goal => goal.render());
+        goals.map(goal => goal.render());
 
-		textInterface.renderInfoPanel();
+        textInterface.renderInfoPanel();
 
-	}
+    }
 }

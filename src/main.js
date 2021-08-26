@@ -24,6 +24,7 @@ let canvas = document.getElementById('canvas'),
 cx = canvas.getContext('2d');
 
 let game = new Game();
+let story = new Story(cx);
 let gameState = new GameState();
 let textInterface = new TextInterface();
 let background = new Background(cx);
@@ -87,9 +88,12 @@ function gameLoop() {
         //music.play();
         effects.playMove();
 
+        gameState.state = 'story';
+    }
+    if (state.pressedKeys.enter && gameState.state === 'story') {
         gameState.state = 'map';
     }
-    if (state.pressedKeys.enter && gameState.state === 'map') {
+    if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
         gameState.state = 'playing';
     }
@@ -256,6 +260,8 @@ function gameLoop() {
         // Stage
         if (gameState.state === 'start_menu') {
             textInterface.renderStart();
+        } else if (gameState.state === 'story') {
+            story.render(game.currentLevel);
         } else if (gameState.state === 'map') {
             textInterface.renderMap();
         } else if (gameState.state === 'end') {
@@ -291,7 +297,7 @@ function gameLoop() {
                 }
                 game.addDistance(1);
                 if (game.completeLevel()) {
-                    gameState.state = 'map';
+                    gameState.state = 'story';
                 }
 
                 let obstacle = new Obstacle(cx);
