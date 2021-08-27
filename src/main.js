@@ -27,7 +27,7 @@ let game = new Game();
 let solarflare = new SolarFlare(cx);
 let story = new Story(cx);
 let gameState = new GameState();
-let textInterface = new TextInterface();
+let textInterface = new TextInterface(cx);
 let background = new Background(cx);
 let obstacleList = []
 
@@ -275,7 +275,7 @@ function gameLoop() {
             textInterface.renderDead(score);
         } else if (gameState.state === 'playing') {
             solarflare.render();
-            
+
             healthArray = game.getHealthArray();
             oxygenArray = game.getOxygenArray();
             distanceArray = game.getDistanceArray();
@@ -286,7 +286,6 @@ function gameLoop() {
 
 
             // PLAYING THE ACTUAL GAME
-            solarflare.render();
             ship.render();
             obstacleList.map(obstacle => obstacle.render())
             currentLevelTicker -= 1

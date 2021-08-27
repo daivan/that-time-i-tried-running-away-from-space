@@ -1,6 +1,7 @@
 class TextInterface {
 
-	constructor() {
+	constructor(context) {
+		this.context = context;
 	}
 
 
@@ -90,21 +91,21 @@ class TextInterface {
 		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
 		let distanceText = "Destination: " + distanceArray[0] + "/"+distanceArray[1];
 		let mineralText = "Minerals: " + minerals;
-		cx.font = "12px Arial";
-		cx.fillStyle = "#FFF";
-		cx.fillText(distanceText, 8, 18);
-		cx.fillStyle = "#AAFFAA";
+		this.context.font = "12px Arial";
+		this.context.fillStyle = "#FFF";
+		this.context.fillText(distanceText, 8, 18);
+		this.context.fillStyle = "#AAFFAA";
 		if (healthArray[0]<=20){
-			cx.fillStyle = "#FF0000";
+			this.context.fillStyle = "#FF0000";
 		}
-		cx.fillText(healthText, 8, 40);
+		this.context.fillText(healthText, 8, 40);
 		// show red text if oxygen is low
-		cx.fillStyle = "#AAAAFF";
+		this.context.fillStyle = "#AAAAFF";
 		if (oxygenArray[0]<=15){
-			cx.fillStyle = "#FF0000";
+			this.context.fillStyle = "#FF0000";
 		}
-		cx.fillText(oxygenText, 8, 62);
-		cx.fillStyle = "#FFFF00";
-		cx.fillText(mineralText, 8, 84);
+		this.context.fillText(oxygenText, 8, 62);
+		this.context.fillStyle = "#FFFF00";
+		this.context.fillText(mineralText, 8, 84);
 	}
 }
