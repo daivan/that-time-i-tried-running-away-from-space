@@ -84,23 +84,27 @@ class TextInterface {
 
 	}
 
-	renderInfoPanel(score, oxygenArray, distanceArray, minerals){
+	renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals){
 
-		//let scoreText = "Distance: " + score;
+		let healthText = "Health: " + healthArray[0] + "/"+healthArray[1];
 		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
 		let distanceText = "Destination: " + distanceArray[0] + "/"+distanceArray[1];
 		let mineralText = "Minerals: " + minerals;
 		cx.font = "12px Arial";
 		cx.fillStyle = "#FFF";
 		cx.fillText(distanceText, 8, 18);
-		//cx.fillText(scoreText, 8, 18);
+		cx.fillStyle = "#AAFFAA";
+		if (healthArray[0]<=20){
+			cx.fillStyle = "#FF0000";
+		}
+		cx.fillText(healthText, 8, 40);
 		// show red text if oxygen is low
 		cx.fillStyle = "#AAAAFF";
 		if (oxygenArray[0]<=15){
 			cx.fillStyle = "#FF0000";
 		}
-		cx.fillText(oxygenText, 8, 40);
+		cx.fillText(oxygenText, 8, 62);
 		cx.fillStyle = "#FFFF00";
-		cx.fillText(mineralText, 8, 62);
+		cx.fillText(mineralText, 8, 84);
 	}
 }

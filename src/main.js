@@ -273,11 +273,11 @@ function gameLoop() {
             oxygenArray = game.getOxygenArray();
             textInterface.renderDead(score);
         } else if (gameState.state === 'playing') {
-            score = game.getScore();
+            healthArray = game.getHealthArray();
             oxygenArray = game.getOxygenArray();
             distanceArray = game.getDistanceArray();
             minerals = game.getMineral();
-            textInterface.renderInfoPanel(score, oxygenArray, distanceArray, minerals);
+            textInterface.renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals);
 
 
 

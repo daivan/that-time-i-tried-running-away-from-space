@@ -8,7 +8,8 @@ class Game {
         this.maxDistance = 60;
         this.currentOxygen = 200;
         this.maxOxygen = 200;
-        //this.nextTile = 1;
+        this.currentHealth = 100;
+        this.maxHealth = 100;
     }
 
     addScore(addScore) {
@@ -29,8 +30,8 @@ class Game {
     getMineral() {
         return this.mineral;
     }
-    getScore() {
-        return this.score;
+    getHealthArray() {
+        return [this.currentHealth, this.maxHealth];
     }
 
     addDistance(distance) {
