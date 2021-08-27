@@ -95,6 +95,8 @@ function gameLoop() {
     }
     if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
+        ship.resetGame()
+        obstacleList = []
         gameState.state = 'playing';
     }
     // Press Space if dead

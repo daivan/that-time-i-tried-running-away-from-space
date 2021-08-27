@@ -4,7 +4,7 @@ class Game {
         this.score = 0;
         this.currentLevel = 0;
         this.currentDistance = 0;
-        this.maxDistance = 100;
+        this.maxDistance = 60;
         this.currentOxygen = 200;
         this.maxOxygen = 200;
         //this.nextTile = 1;
@@ -62,7 +62,7 @@ class Game {
     setLevel() {
         this.currentLevel+=1;
         this.currentDistance = 0;
-        this.maxDistance = 10;
+        this.maxDistance = 60;
         this.maxOxygen = 200;
         this.currentOxygen = 200;
     }
