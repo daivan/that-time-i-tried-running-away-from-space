@@ -70,8 +70,6 @@ class Game {
         this.currentLevel+=1;
         this.currentDistance = 0;
         this.maxDistance = 60;
-        this.maxOxygen = 200;
-        this.currentOxygen = 200;
     }
     makeMove(event) {
         let mouseX = event.pageX;
