@@ -276,7 +276,8 @@ function gameLoop() {
             score = game.getScore();
             oxygenArray = game.getOxygenArray();
             distanceArray = game.getDistanceArray();
-            textInterface.renderInfoPanel(score, oxygenArray, distanceArray);
+            minerals = game.getMineral();
+            textInterface.renderInfoPanel(score, oxygenArray, distanceArray, minerals);
 
 
 

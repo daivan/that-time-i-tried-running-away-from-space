@@ -21,11 +21,15 @@ class Obstacle {
 		this.showDamageAnimation = false;
 		this.lootType = 'nothing';
 		this.lootAmount = 0;
-		if(Math.floor(Math.random() * 100)>85){
+		this.randomNumber = Math.random() * 100;
+		
+		if(this.randomNumber>85){
 			this.lootType = 'oxygen';
 			this.lootAmount = 10;
+		}else if(this.randomNumber>55 && this.randomNumber<85){
+			this.lootType = 'mineral';
+			this.lootAmount = 10;
 		}
-		
     }
 
 
@@ -83,10 +87,27 @@ class Obstacle {
 				this.context.arc(this.x+15, this.y+30, 5, 25, 50, false);
 				this.context.fill();
 				this.context.closePath();
-				this.context.shadowBlur = 0;
+				this.context.shadowBlur = 5;
 				let title = "oxygen"
 				this.context.fillText(title, this.x+18, this.y+42);
+				this.context.shadowBlur = 0;
 			}
+
+			if(this.lootType == 'mineral'){
+				this.context.fillStyle = "#FFFF00";
+				this.context.shadowColor = "#FFFF00";
+				this.context.beginPath();
+				this.context.shadowBlur = 10;
+				this.context.fillStyle = "#FFFF00";
+				this.context.shadowColor = "#000";
+				this.context.arc(this.x+15, this.y+30, 5, 25, 50, false);
+				this.context.fill();
+				this.context.closePath();
+				this.context.shadowBlur = 5;
+				let title = "mineral"
+				this.context.fillText(title, this.x+18, this.y+42);
+				this.context.shadowBlur = 0;
+			}			
 		}
 
 
