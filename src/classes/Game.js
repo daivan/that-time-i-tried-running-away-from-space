@@ -55,6 +55,9 @@ class Game {
         if (this.currentOxygen <= 0) {
             return true;
         }
+        if (this.currentHealth <= 0) {
+            return true;
+        }
         return false;
     }
 
@@ -131,4 +134,11 @@ class Game {
         textInterface.renderInfoPanel();
 
     }
+
+    checkShipAndSolarFlare(ship, solarflare){
+		if(solarflare.spawnLeft && ship.position_x<64){
+			this.currentHealth-=5;
+
+		}
+	}
 }

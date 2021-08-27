@@ -24,6 +24,7 @@ let canvas = document.getElementById('canvas'),
 cx = canvas.getContext('2d');
 
 let game = new Game();
+let solarflare = new SolarFlare(cx);
 let story = new Story(cx);
 let gameState = new GameState();
 let textInterface = new TextInterface();
@@ -269,10 +270,12 @@ function gameLoop() {
         } else if (gameState.state === 'end') {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
-            score = game.getScore();
+            score = 0;
             oxygenArray = game.getOxygenArray();
             textInterface.renderDead(score);
         } else if (gameState.state === 'playing') {
+            solarflare.render();
+            
             healthArray = game.getHealthArray();
             oxygenArray = game.getOxygenArray();
             distanceArray = game.getDistanceArray();
@@ -283,10 +286,13 @@ function gameLoop() {
 
 
             // PLAYING THE ACTUAL GAME
+            solarflare.render();
             ship.render();
             obstacleList.map(obstacle => obstacle.render())
             currentLevelTicker -= 1
             if (currentLevelTicker < 0) {
+                game.checkShipAndSolarFlare(ship, solarflare);
+                solarflare.addTicker();
                 ship.moveBack(obstacleList)
                 obstacleList.map(obstacle => obstacle.moveBack())
                 currentLevelTicker = levelTicker
