@@ -272,7 +272,7 @@ function gameLoop() {
         } else if (gameState.state === 'dead') {
             score = 0;
             oxygenArray = game.getOxygenArray();
-            textInterface.renderDead(score);
+            textInterface.renderDead(game.currentLevel);
         } else if (gameState.state === 'playing') {
             solarflare.render();
 

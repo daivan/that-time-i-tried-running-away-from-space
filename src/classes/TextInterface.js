@@ -62,14 +62,14 @@ class TextInterface {
 
 	}
 
-	renderDead(score){
+	renderDead(level){
 
 		cx.fillStyle = 'rgba(225,225,225,0.8)';
 		cx.fillRect(0,0,768,512);
 
 		let title = "You died!";
-		let subtitle1 = "Your final score was:";
-		let subtitle2 = score;
+		let subtitle1 = "You came to the level:";
+		let subtitle2 = level;
 
 		let start = "Press <space> to play again";
 
