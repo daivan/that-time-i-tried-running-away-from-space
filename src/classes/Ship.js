@@ -4,13 +4,13 @@ class Ship
 	constructor(context)
 	{
 		let img_background = new Image();
-		img_background.src = 'assets/images/spritesheet.png';
+		img_background.src = 'assets/images/spritesheetMin.png';
 		this.context=context;
 		this.image=img_background;
 		this.position_x = 64;
 		this.position_y = 64;
 		this.current_animation_frame = 1;
-		this.max_animation_frame = 3;
+		this.max_animation_frame = 2;
 		this.current_frame_rate = 20;
 		this.max_frame_rate = 10;
 		this.movable = true;
@@ -91,8 +91,6 @@ class Ship
 			return [0,0]
 		}else if(frame == 1){
 			return [64,0]
-		}else if(frame == 2){
-			return [128,0]
 		}else{
 			return [0,0]
 		}
