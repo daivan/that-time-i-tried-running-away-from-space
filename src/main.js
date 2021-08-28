@@ -106,7 +106,7 @@ function gameLoop() {
         game.resetGame()
         ship.resetGame()
         obstacleList = []
-        gameState.state = 'playing';
+        gameState.state = 'start_menu';
     }
 
     // Press Space in main menu

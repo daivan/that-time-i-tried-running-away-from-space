@@ -68,6 +68,12 @@ class Game {
         this.score = 0;
         this.maxOxygen = 200;
         this.currentOxygen = 200;
+        this.mineral = 0;
+        this.currentLevel = 0;
+        this.currentDistance = 0;
+        this.maxDistance = 60;
+        this.currentHealth = 100;
+        this.maxHealth = 100;
     }
 
     setLevel() {
