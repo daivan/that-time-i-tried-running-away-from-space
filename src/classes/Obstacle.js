@@ -26,9 +26,11 @@ class Obstacle {
 		if(this.randomNumber>85){
 			this.lootType = 'oxygen';
 			this.lootAmount = 10;
+            this.lootColor= "#AAAAFF";
 		}else if(this.randomNumber>55 && this.randomNumber<85){
 			this.lootType = 'mineral';
 			this.lootAmount = 10;
+            this.lootColor= "#FFFF00";
 		}
     }
 

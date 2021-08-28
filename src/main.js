@@ -29,7 +29,8 @@ let story = new Story(cx);
 let gameState = new GameState();
 let textInterface = new TextInterface(cx);
 let background = new Background(cx);
-let obstacleList = []
+let obstacleList = [];
+let visualsList = [];
 
 let ship = new Ship(cx);
 
@@ -81,6 +82,12 @@ window.addEventListener("click", onClick, false);
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
+
+    if (visualsList.length > 0){
+        visualsList.forEach(element =>{
+            if (element.time > 0) element.render();
+        })
+    }
 
 
     // Press Space in main menu
@@ -137,6 +144,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
+                    if (currentObstacle.lootType != "nothing"){
+                        visualsList.push(new FloatingText(cx,ship.getPosition(),"+"+currentObstacle.lootAmount+" "+currentObstacle.lootType,currentObstacle.lootColor))
+                    }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
 
                 }
@@ -172,6 +182,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
+                    if (currentObstacle.lootType != "nothing"){
+                        visualsList.push(new FloatingText(cx,ship.getPosition(),"+"+currentObstacle.lootAmount+" "+currentObstacle.lootType,currentObstacle.lootColor))
+                    }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }
@@ -205,6 +218,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
+                    if (currentObstacle.lootType != "nothing"){
+                        visualsList.push(new FloatingText(cx,ship.getPosition(),"+"+currentObstacle.lootAmount+" "+currentObstacle.lootType,currentObstacle.lootColor))
+                    }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }
@@ -237,6 +253,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
+                    if (currentObstacle.lootType != "nothing"){
+                        visualsList.push(new FloatingText(cx,ship.getPosition(),"+"+currentObstacle.lootAmount+" "+currentObstacle.lootType,currentObstacle.lootColor))
+                    }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
             }
