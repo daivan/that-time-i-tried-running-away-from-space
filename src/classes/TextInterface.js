@@ -32,7 +32,7 @@ class TextInterface {
 	renderMap() {
 
 		let title = "Select destination";
-		let start = "Press <Enter> to select the destination";
+		let start = "Press <Space> to select the destination";
 		cx.font = "30px Arial";
 		cx.fillStyle = "#FFF";  //<======= here
 		cx.fillText(title, 20, 270);
@@ -40,6 +40,7 @@ class TextInterface {
 		
 	}
 	
+
 	renderEnd() {
 		let title = "The End";
 

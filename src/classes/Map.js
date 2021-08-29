@@ -32,7 +32,7 @@ class Map {
         if (state.pressedKeys.down) {
             this.cursorLocation = 1
 
-            state.pressedKeys.up = false
+            state.pressedKeys.down = false
         }
         this.destinationList.map(destination => {
 

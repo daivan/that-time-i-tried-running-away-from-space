@@ -22,6 +22,7 @@ let canvas = document.getElementById('canvas'),
 cx = canvas.getContext('2d');
 
 let map = new Map(cx);
+let shop = new Shop(cx);
 let game = new Game();
 let solarflare = new SolarFlare(cx);
 let story = new Story(cx);
@@ -93,15 +94,19 @@ function gameLoop() {
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
 
-        music.play();
+        //music.play();
 
         gameState.state = 'story';
         state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && gameState.state === 'story') {
-        gameState.state = 'map';
+        gameState.state = 'shop';
         state.pressedKeys.space = false;
     }
+    if (state.pressedKeys.space && shop.cursorLocation == 2 && gameState.state === 'shop') {
+        gameState.state = 'map';
+        state.pressedKeys.space = false;
+    }    
     if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
         ship.resetGame()
@@ -289,6 +294,8 @@ function gameLoop() {
             textInterface.renderStart();
         } else if (gameState.state === 'story') {
             story.render(game.currentLevel);
+        } else if (gameState.state === 'shop') {
+            shop.render();
         } else if (gameState.state === 'map') {
             textInterface.renderMap();
             map.render();
