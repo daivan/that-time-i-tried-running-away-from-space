@@ -21,6 +21,7 @@ let canvas = document.getElementById('canvas'),
 
 cx = canvas.getContext('2d');
 
+let map = new Map(cx);
 let game = new Game();
 let solarflare = new SolarFlare(cx);
 let story = new Story(cx);
@@ -95,9 +96,11 @@ function gameLoop() {
         music.play();
 
         gameState.state = 'story';
+        state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.enter && gameState.state === 'story') {
+    if (state.pressedKeys.space && gameState.state === 'story') {
         gameState.state = 'map';
+        state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
@@ -288,6 +291,7 @@ function gameLoop() {
             story.render(game.currentLevel);
         } else if (gameState.state === 'map') {
             textInterface.renderMap();
+            map.render();
         } else if (gameState.state === 'end') {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
