@@ -9,8 +9,6 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 let music = new Music(audioCtx)
-let effects = new Effects(audioCtx)
-
 
 let canvas = document.getElementById('canvas'),
     cw = canvas.width,
@@ -94,8 +92,7 @@ function gameLoop() {
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
 
-        //music.play();
-        effects.playMove();
+        music.play();
 
         gameState.state = 'story';
     }
