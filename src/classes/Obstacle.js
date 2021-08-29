@@ -2,7 +2,7 @@ class Obstacle {
 
     constructor(context) {
         let image = new Image();
-        image.src = 'assets/images/spritesheetMin.png';
+        image.src = 'assets/images/spritesheet.png';
         this.current_animation_frame=1
         this.context = context;
         this.image = image;
