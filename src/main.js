@@ -83,10 +83,10 @@ window.addEventListener("click", onClick, false);
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 
-    if (visualsList.length > 0){
-        visualsList.forEach(element =>{
+    if (visualsList.length > 0) {
+        visualsList.forEach(element => {
             if (element.time > 0) element.render();
-            else arrayRemove(visualsList,element);
+            else arrayRemove(visualsList, element);
         })
     }
 
@@ -106,17 +106,24 @@ function gameLoop() {
     if (state.pressedKeys.space && shop.cursorLocation == 2 && gameState.state === 'shop') {
         gameState.state = 'map';
         state.pressedKeys.space = false;
-    }    
+    }
     // Buy health in store
     if (state.pressedKeys.space && shop.cursorLocation == 0 && gameState.state === 'shop') {
-        game.currentHealth += 25
+        if (game.getMineral() >= 100) {
+            game.addHealth(25);
+            game.mineral -= 100;
+        }
+
         state.pressedKeys.space = false;
-    }      
+    }
     // Buy oxygen in store
     if (state.pressedKeys.space && shop.cursorLocation == 1 && gameState.state === 'shop') {
-        game.currentOxygen += 25
+        if (game.getMineral() >= 100) {
+            game.addOxygen(25);
+            game.mineral -= 100;
+        }
         state.pressedKeys.space = false;
-    }      
+    }
     if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
         ship.resetGame()
@@ -160,9 +167,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
-                    if (currentObstacle.lootType != "nothing"){
+                    if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
-                        visualsList.push(new FloatingText(cx,ship.getPosition(),text,currentObstacle.lootColor))
+                        visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
 
@@ -199,9 +206,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
-                    if (currentObstacle.lootType != "nothing"){
+                    if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
-                        visualsList.push(new FloatingText(cx,ship.getPosition(),text,currentObstacle.lootColor))
+                        visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -236,9 +243,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
-                    if (currentObstacle.lootType != "nothing"){
+                    if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
-                        visualsList.push(new FloatingText(cx,ship.getPosition(),text,currentObstacle.lootColor))
+                        visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -272,9 +279,9 @@ function gameLoop() {
                 ship.attack(currentObstacle);
                 if (currentObstacle.dead === true) {
                     game.getObstacleReward(currentObstacle)
-                    if (currentObstacle.lootType != "nothing"){
+                    if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
-                        visualsList.push(new FloatingText(cx,ship.getPosition(),text,currentObstacle.lootColor))
+                        visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }

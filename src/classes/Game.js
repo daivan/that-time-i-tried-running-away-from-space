@@ -2,7 +2,7 @@ class Game {
 
     constructor() {
         this.score = 0;
-        this.mineral = 0;
+        this.mineral = 300;
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
@@ -16,6 +16,18 @@ class Game {
         this.score += addScore;
     }
 
+    addOxygen(oxygen) {
+        this.currentOxygen += oxygen;
+        if(this.currentOxygen>this.maxOxygen){
+            this.currentOxygen = this.maxOxygen;
+        }
+    }
+    addHealth(health) {
+        this.currentHealth += health;
+        if(this.currentHealth>this.maxHealth){
+            this.currentHealth = this.maxHealth;
+        }
+    }
     getObstacleReward(obstacle) {
         if (obstacle.lootType == 'oxygen') {
             this.currentOxygen += obstacle.lootAmount;
