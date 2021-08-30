@@ -107,6 +107,16 @@ function gameLoop() {
         gameState.state = 'map';
         state.pressedKeys.space = false;
     }    
+    // Buy health in store
+    if (state.pressedKeys.space && shop.cursorLocation == 0 && gameState.state === 'shop') {
+        game.currentHealth += 25
+        state.pressedKeys.space = false;
+    }      
+    // Buy oxygen in store
+    if (state.pressedKeys.space && shop.cursorLocation == 1 && gameState.state === 'shop') {
+        game.currentOxygen += 25
+        state.pressedKeys.space = false;
+    }      
     if (state.pressedKeys.space && gameState.state === 'map') {
         game.setLevel()
         ship.resetGame()
@@ -295,7 +305,7 @@ function gameLoop() {
         } else if (gameState.state === 'story') {
             story.render(game.currentLevel);
         } else if (gameState.state === 'shop') {
-            shop.render();
+            shop.render(game);
         } else if (gameState.state === 'map') {
             textInterface.renderMap();
             map.render();
