@@ -28,17 +28,6 @@ class TextInterface {
 		cx.font = "12px Arial";
 		cx.fillText(credits, 20, 500);
 	}
-
-	renderMap() {
-
-		let title = "Select destination";
-		let start = "Press <Space> to select the destination";
-		cx.font = "30px Arial";
-		cx.fillStyle = "#FFF";  //<======= here
-		cx.fillText(title, 20, 270);
-		cx.fillText(start, 20, 450);
-		
-	}
 	
 
 	renderEnd() {

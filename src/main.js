@@ -96,7 +96,7 @@ function gameLoop() {
 
         //music.play();
 
-        gameState.state = 'story';
+        gameState.state = 'map';
         state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && gameState.state === 'story') {
@@ -314,8 +314,7 @@ function gameLoop() {
         } else if (gameState.state === 'shop') {
             shop.render(game);
         } else if (gameState.state === 'map') {
-            textInterface.renderMap();
-            map.render();
+            map.render(game);
         } else if (gameState.state === 'end') {
             textInterface.renderEnd();
         } else if (gameState.state === 'dead') {
