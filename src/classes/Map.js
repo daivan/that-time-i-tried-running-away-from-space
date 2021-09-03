@@ -17,6 +17,13 @@ class Map {
                 "x": 0,
                 "y": 40,
                 "size": 10,
+                "name": "Medium galaxy"
+            },            
+            {
+                "location": 2,
+                "x": 0,
+                "y": 80,
+                "size": 10,
                 "name": "Hard galaxy"
             }
         ];
@@ -42,8 +49,8 @@ class Map {
         }
         if (state.pressedKeys.down) {
             this.cursorLocation += 1
-            if (this.cursorLocation > 1) {
-                this.cursorLocation = 1
+            if (this.cursorLocation > 2) {
+                this.cursorLocation = 2
             }
 
             state.pressedKeys.down = false

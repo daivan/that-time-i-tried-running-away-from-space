@@ -100,9 +100,15 @@ class Game {
     }
 
     getDifficulty(){
+        // Medium
         if(this.difficultySetting == 1){
+            return 4;
+        }
+        // Hard
+        if(this.difficultySetting == 2){
             return 6;
         }
+        // Easy
         return 2;
     }
     
