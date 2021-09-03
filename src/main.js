@@ -28,12 +28,13 @@ let story = new Story(cx);
 let textInterface = new TextInterface(cx);
 let background = new Background(cx);
 let obstacleList = [];
+let fireballList = [];
 let visualsList = [];
 
 let ship = new Ship(cx);
 
-let currentLevelTicker = 50;
-let levelTicker = 50;
+let currentLevelTicker = 40;
+let levelTicker = 40;
 
 
 let state = {
@@ -120,6 +121,7 @@ function gameLoop() {
         game.setLevel(map.cursorLocation)
         ship.resetGame()
         obstacleList = []
+        fireballList = []
 
 
         game.state = 'story'
@@ -134,6 +136,7 @@ function gameLoop() {
         game.resetGame()
         ship.resetGame()
         obstacleList = []
+        fireballList = []
         game.state = 'start_menu';
         state.pressedKeys.space = false;
     }
@@ -331,6 +334,15 @@ function gameLoop() {
             // PLAYING THE ACTUAL GAME
             ship.render();
             obstacleList.map(obstacle => obstacle.render())
+            fireballList.map(fireball => {
+                fireball.render()
+                let collision = checkCollision(fireball, ship);
+                if(collision){
+                    fireballList = arrayRemove(fireballList, fireball);
+                    game.addHealth(-15)
+                }
+
+            })
             currentLevelTicker -= 1
             if (currentLevelTicker < 0) {
                 ship.moveBack(obstacleList)
@@ -365,9 +377,9 @@ function gameLoop() {
                     obstacle.y = position * 64;
                     obstacleList.push(obstacle)
                   }
-
-     
-                
+           
+                  let fireball = new Fireball(cx);
+                  fireballList.push(fireball)
             }
 
             lastTime = currentTime - (delta % interval);
@@ -423,4 +435,19 @@ function getObstaclePosition(array, gen_nums) {
        return rand;
     }
     return getObstaclePosition(array, gen_nums);
+}
+
+function checkCollision(fireball, ship){
+    fireball.width = 64
+    fireball.height = 64
+    ship.width =  64
+    ship.height = 64
+
+    if (fireball.x < ship.position_x + ship.width &&
+        fireball.x + fireball.width > ship.position_x &&
+        fireball.y < ship.position_y + ship.height &&
+        fireball.y + fireball.height > ship.position_y) {
+         // collision detected!
+         return true
+     }
 }
