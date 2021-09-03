@@ -355,11 +355,14 @@ function gameLoop() {
 
                 }
                 
+                var possibleObstacles = [0,1,2,3,4,5,6,7];
+                var gen_nums = [];
                 difficulty = game.getDifficulty()
                 for (let i = 0; i < difficulty; i++) {
+                    let position = getObstaclePosition(possibleObstacles, gen_nums)
                     let obstacle = new Obstacle(cx);
                     obstacle.x = 704
-                    obstacle.y = Math.floor(Math.random() * 8) * 64;
+                    obstacle.y = position * 64;
                     obstacleList.push(obstacle)
                   }
 
@@ -404,4 +407,20 @@ function arrayRemove(arr, value) {
     return arr.filter(function (ele) {
         return ele != value;
     });
+}
+
+
+function in_array(array, el) {
+   for(var i = 0 ; i < array.length; i++) 
+       if(array[i] == el) return true;
+   return false;
+}
+
+function getObstaclePosition(array, gen_nums) {
+    var rand = array[Math.floor(Math.random()*array.length)];
+    if(!in_array(gen_nums, rand)) {
+       gen_nums.push(rand); 
+       return rand;
+    }
+    return getObstaclePosition(array, gen_nums);
 }
