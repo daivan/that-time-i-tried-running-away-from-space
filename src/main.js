@@ -24,9 +24,8 @@ cx = canvas.getContext('2d');
 let map = new Map(cx);
 let shop = new Shop(cx);
 let game = new Game();
-//let solarflare = new SolarFlare(cx);
 let story = new Story(cx);
-let gameState = new GameState();
+//let gameState = new GameState();
 let textInterface = new TextInterface(cx);
 let background = new Background(cx);
 let obstacleList = [];
@@ -68,17 +67,9 @@ function keyup(event) {
     state.pressedKeys[key] = false;
 }
 
-function onClick(event) {
-    game.makeMove(event);
-}
 
 window.addEventListener("keydown", keydown, false);
 window.addEventListener("keyup", keyup, false);
-
-// mouse click
-window.addEventListener("click", onClick, false);
-
-
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
@@ -92,25 +83,25 @@ function gameLoop() {
 
 
     // Press Space in main menu
-    if (state.pressedKeys.space && gameState.state === 'start_menu') {
+    if (state.pressedKeys.space && game.state === 'start_menu') {
 
         music.play();
 
-        gameState.state = 'map';
+        game.state = 'map';
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && gameState.state === 'story' && game.currentLevel != 6) {
+    if (state.pressedKeys.space && game.state === 'story' && game.currentLevel != 6) {
 
-        gameState.state = 'playing';
+        game.state = 'playing';
 
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && shop.cursorLocation == 2 && gameState.state === 'shop') {
-        gameState.state = 'story';
+    if (state.pressedKeys.space && shop.cursorLocation == 2 && game.state === 'shop') {
+        game.state = 'story';
         state.pressedKeys.space = false;
     }
     // Buy health in store
-    if (state.pressedKeys.space && shop.cursorLocation == 0 && gameState.state === 'shop') {
+    if (state.pressedKeys.space && shop.cursorLocation == 0 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
             game.addHealth(25);
             game.mineral -= 100;
@@ -118,34 +109,35 @@ function gameLoop() {
         state.pressedKeys.space = false;
     }
     // Buy oxygen in store
-    if (state.pressedKeys.space && shop.cursorLocation == 1 && gameState.state === 'shop') {
+    if (state.pressedKeys.space && shop.cursorLocation == 1 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
             game.addOxygen(25);
             game.mineral -= 100;
         }
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && gameState.state === 'map') {
-        game.setLevel()
+    if (state.pressedKeys.space && game.state === 'map') {
+        
+        game.setLevel(map.cursorLocation)
         ship.resetGame()
         obstacleList = []
 
         if (map.cursorLocation == 2) {
-            gameState.state = 'shop'
+            game.state = 'shop'
         } else {
-            gameState.state = 'story'
+            game.state = 'story'
         }
         state.pressedKeys.space = false;
 
 
     }
     // Press Space if dead
-    if (state.pressedKeys.space && gameState.state === 'dead') {
+    if (state.pressedKeys.space && game.state === 'dead') {
 
         game.resetGame()
         ship.resetGame()
         obstacleList = []
-        gameState.state = 'start_menu';
+        game.state = 'start_menu';
         state.pressedKeys.space = false;
     }
 
@@ -310,29 +302,25 @@ function gameLoop() {
         // clear everything on the screen
         cx.clearRect(0, 0, cw, ch);
 
-
-
-
         // RENDER THE BACKGROUND
         background.render();
 
         // Stage
-        if (gameState.state === 'start_menu') {
+        if (game.state === 'start_menu') {
             textInterface.renderStart();
-        } else if (gameState.state === 'story') {
+        } else if (game.state === 'story') {
             story.render(game.currentLevel);
-        } else if (gameState.state === 'shop') {
+        } else if (game.state === 'shop') {
             shop.render(game);
-        } else if (gameState.state === 'map') {
+        } else if (game.state === 'map') {
             map.render(game);
-        } else if (gameState.state === 'end') {
+        } else if (game.state === 'end') {
             textInterface.renderEnd();
-        } else if (gameState.state === 'dead') {
+        } else if (game.state === 'dead') {
             score = 0;
             oxygenArray = game.getOxygenArray();
             textInterface.renderDead(game.currentLevel);
-        } else if (gameState.state === 'playing') {
-            //solarflare.render();
+        } else if (game.state === 'playing') {
 
             healthArray = game.getHealthArray();
             oxygenArray = game.getOxygenArray();
@@ -348,26 +336,24 @@ function gameLoop() {
             obstacleList.map(obstacle => obstacle.render())
             currentLevelTicker -= 1
             if (currentLevelTicker < 0) {
-                //game.checkShipAndSolarFlare(ship, solarflare);
-                //solarflare.addTicker();
                 ship.moveBack(obstacleList)
                 obstacleList.map(obstacle => obstacle.moveBack())
                 currentLevelTicker = levelTicker
                 game.addScore(10)
                 game.removeOxygen(1)
                 if (game.over() == true) {
-                    gameState.state = 'dead';
+                    game.state = 'dead';
                 }
                 if (ship.isDead()) {
-                    gameState.state = 'dead';
+                    game.state = 'dead';
                 }
                 game.addDistance(1);
                 if (game.completeLevel()) {
                     if (game.currentLevel == 5) {
                         game.currentLevel += 1
-                        gameState.state = 'story'
+                        game.state = 'story'
                     } else {
-                        gameState.state = 'map';
+                        game.state = 'map';
                     }
 
                 }
