@@ -11,6 +11,7 @@ class Game {
         this.maxOxygen = 200;
         this.currentHealth = 100;
         this.maxHealth = 100;
+        this.difficultySetting = 0;
     }
 
     addScore(addScore) {
@@ -92,11 +93,18 @@ class Game {
     setLevel(difficultySetting) {
         this.currentLevel += 1;
         this.currentDistance = 0;
-
+        
+        this.difficultySetting = difficultySetting
 
         //this.maxDistance = 60;
     }
 
+    getDifficulty(){
+        if(this.difficultySetting == 1){
+            return 6;
+        }
+        return 2;
+    }
     
     update() {
 

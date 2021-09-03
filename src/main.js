@@ -25,7 +25,6 @@ let map = new Map(cx);
 let shop = new Shop(cx);
 let game = new Game();
 let story = new Story(cx);
-//let gameState = new GameState();
 let textInterface = new TextInterface(cx);
 let background = new Background(cx);
 let obstacleList = [];
@@ -357,11 +356,17 @@ function gameLoop() {
                     }
 
                 }
+                
+                difficulty = game.getDifficulty()
+                for (let i = 0; i < difficulty; i++) {
+                    let obstacle = new Obstacle(cx);
+                    obstacle.x = 704
+                    obstacle.y = Math.floor(Math.random() * 8) * 64;
+                    obstacleList.push(obstacle)
+                  }
 
-                let obstacle = new Obstacle(cx);
-                obstacle.x = 704
-                obstacle.y = Math.floor(Math.random() * 8) * 64;
-                obstacleList.push(obstacle)
+     
+                
             }
 
             lastTime = currentTime - (delta % interval);
@@ -381,8 +386,6 @@ Promise.all([
     loadImage("assets/images/spritesheet.png"),
 ])
     .then(() => {
-        // draw images to canvas
-
         gameLoop();
 
     });
