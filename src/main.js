@@ -96,7 +96,7 @@ function gameLoop() {
         state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && shop.cursorLocation == 2 && game.state === 'shop') {
-        game.state = 'story';
+        game.state = 'map';
         state.pressedKeys.space = false;
     }
     // Buy health in store
@@ -121,11 +121,9 @@ function gameLoop() {
         ship.resetGame()
         obstacleList = []
 
-        if (map.cursorLocation == 2) {
-            game.state = 'shop'
-        } else {
-            game.state = 'story'
-        }
+
+        game.state = 'story'
+        
         state.pressedKeys.space = false;
 
 
@@ -352,7 +350,7 @@ function gameLoop() {
                         game.currentLevel += 1
                         game.state = 'story'
                     } else {
-                        game.state = 'map';
+                        game.state = 'shop';
                     }
 
                 }

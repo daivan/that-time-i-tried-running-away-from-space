@@ -18,13 +18,6 @@ class Map {
                 "y": 40,
                 "size": 10,
                 "name": "Hard galaxy"
-            },
-            {
-                "location": 2,
-                "x": 0,
-                "y": 80,
-                "size": 10,
-                "name": "Shop"
             }
         ];
         this.finalMission = {
@@ -49,8 +42,8 @@ class Map {
         }
         if (state.pressedKeys.down) {
             this.cursorLocation += 1
-            if (this.cursorLocation > 2) {
-                this.cursorLocation = 2
+            if (this.cursorLocation > 1) {
+                this.cursorLocation = 1
             }
 
             state.pressedKeys.down = false
