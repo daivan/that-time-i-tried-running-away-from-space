@@ -11,7 +11,7 @@ class TextInterface {
 		let subtitle = "";
 		let story1 = "";
 		let story2 = "";
-		let story3 = "Avoid the asteroids!";
+		let story3 = "Try go run as far as you can!";
 		let start = "Press <Space> to play";
 		let credits = "Created by: Daivan Trinh & Hakan Einarsson for js13kGames.com 2021";
 		cx.font = "30px Arial";

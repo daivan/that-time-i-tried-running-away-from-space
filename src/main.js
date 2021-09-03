@@ -94,17 +94,19 @@ function gameLoop() {
     // Press Space in main menu
     if (state.pressedKeys.space && gameState.state === 'start_menu') {
 
-        //music.play();
+        music.play();
 
         gameState.state = 'map';
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && gameState.state === 'story') {
-        gameState.state = 'shop';
+    if (state.pressedKeys.space && gameState.state === 'story' && game.currentLevel != 6) {
+
+        gameState.state = 'playing';
+
         state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && shop.cursorLocation == 2 && gameState.state === 'shop') {
-        gameState.state = 'map';
+        gameState.state = 'story';
         state.pressedKeys.space = false;
     }
     // Buy health in store
@@ -113,7 +115,6 @@ function gameLoop() {
             game.addHealth(25);
             game.mineral -= 100;
         }
-
         state.pressedKeys.space = false;
     }
     // Buy oxygen in store
@@ -128,7 +129,15 @@ function gameLoop() {
         game.setLevel()
         ship.resetGame()
         obstacleList = []
-        gameState.state = 'playing';
+
+        if (map.cursorLocation == 2) {
+            gameState.state = 'shop'
+        } else {
+            gameState.state = 'story'
+        }
+        state.pressedKeys.space = false;
+
+
     }
     // Press Space if dead
     if (state.pressedKeys.space && gameState.state === 'dead') {
@@ -137,6 +146,7 @@ function gameLoop() {
         ship.resetGame()
         obstacleList = []
         gameState.state = 'start_menu';
+        state.pressedKeys.space = false;
     }
 
     // Press Space in main menu
@@ -353,7 +363,13 @@ function gameLoop() {
                 }
                 game.addDistance(1);
                 if (game.completeLevel()) {
-                    gameState.state = 'story';
+                    if (game.currentLevel == 5) {
+                        game.currentLevel += 1
+                        gameState.state = 'story'
+                    } else {
+                        gameState.state = 'map';
+                    }
+
                 }
 
                 let obstacle = new Obstacle(cx);

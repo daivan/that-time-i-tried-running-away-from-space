@@ -106,10 +106,6 @@ class Music {
     this.scheduler();
   }
 
-  playMove() {
-    console.log("");
-  }
-
   nextNote() {
     // Advance the beat number, wrap to zero
     if (this.currentNote === this.notesToPlay.length - 1) {

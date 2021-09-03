@@ -2,7 +2,7 @@ class Game {
 
     constructor() {
         this.score = 0;
-        this.mineral = 300;
+        this.mineral = 0;
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
@@ -18,13 +18,13 @@ class Game {
 
     addOxygen(oxygen) {
         this.currentOxygen += oxygen;
-        if(this.currentOxygen>this.maxOxygen){
+        if (this.currentOxygen > this.maxOxygen) {
             this.currentOxygen = this.maxOxygen;
         }
     }
     addHealth(health) {
         this.currentHealth += health;
-        if(this.currentHealth>this.maxHealth){
+        if (this.currentHealth > this.maxHealth) {
             this.currentHealth = this.maxHealth;
         }
     }
@@ -37,7 +37,7 @@ class Game {
         }
         if (obstacle.lootType == 'mineral') {
             this.mineral += obstacle.lootAmount;
-        }        
+        }
     }
     getMineral() {
         return this.mineral;
@@ -89,9 +89,9 @@ class Game {
     }
 
     setLevel() {
-        this.currentLevel+=1;
+        this.currentLevel += 1;
         this.currentDistance = 0;
-        this.maxDistance = 60;
+        //this.maxDistance = 60;
     }
     makeMove(event) {
         let mouseX = event.pageX;
@@ -153,10 +153,10 @@ class Game {
 
     }
 
-    checkShipAndSolarFlare(ship, solarflare){
-		if(solarflare.spawnLeft && ship.position_x<64){
-			this.currentHealth-=5;
+    checkShipAndSolarFlare(ship, solarflare) {
+        if (solarflare.spawnLeft && ship.position_x < 64) {
+            this.currentHealth -= 5;
 
-		}
-	}
+        }
+    }
 }

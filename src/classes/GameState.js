@@ -109,7 +109,7 @@ class GameState {
 
 	printAllObjectLocations(){
 		this.objects.map(function(e){
-			console.log(e.getLocation())
+			
 		})
 		
 	}
@@ -118,10 +118,10 @@ class GameState {
 		let objectInLocation = false;
 		objectInLocation = this.objects.map((object)=>{
 			if(object.getLocation()[0] == location[0] && object.getLocation()[1] == location[1]){
-				return 'bajs'
+				return 'not seems to be used'
 			}
 		})
-		//console.log(this.objects)
+		
 		return objectInLocation;
 	}
 
