@@ -8,14 +8,14 @@ class Shop {
     }
 
 
-    render(game) {
+    render(game, ship) {
 
         
-        this.renderText(game);
+        this.renderText(game, ship);
     }
 
 
-    renderText(game) {
+    renderText(game, ship) {
         if (state.pressedKeys.up) {
             if(this.cursorLocation==0){
                 this.cursorLocation = 0
@@ -25,8 +25,8 @@ class Shop {
             state.pressedKeys.up = false
         }
         if (state.pressedKeys.down) {
-            if(this.cursorLocation==2){
-                this.cursorLocation = 2
+            if(this.cursorLocation==3){
+                this.cursorLocation = 3
             }else{
                 this.cursorLocation += 1
             }
@@ -41,11 +41,12 @@ class Shop {
         let oxygenArray = game.getOxygenArray();
 
         let minerals = game.getMineral();
-
+        let damage = ship.damage
         let healthText = "Health: " + healthArray[0] + "/"+healthArray[1];
 		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
 
 		let mineralText = "Minerals: " + minerals;
+        let attackPowerText = "Attack: " + damage;
 		this.context.font = "20px Arial";
 		this.context.fillStyle = "#AAFFAA";
 		if (healthArray[0]<=20){
@@ -60,6 +61,8 @@ class Shop {
 		this.context.fillText(oxygenText, 8, 62);
 		this.context.fillStyle = "#FFFF00";
 		this.context.fillText(mineralText, 8, 84);
+		this.context.fillStyle = "#FF0000";
+		this.context.fillText(attackPowerText, 8, 104);
 
         this.context.font = "30px Arial";
         this.context.fillStyle = "#FFF";  //<======= here
@@ -78,7 +81,12 @@ class Shop {
         if (this.cursorLocation == 2) {
             this.context.shadowBlur = 5;
         }
-        this.context.fillText(continueText, 20, 450);
+        this.context.fillText("Buy attack power - Cost 100 minerals", 20, 450);
+        this.context.shadowBlur = 0;
+        if (this.cursorLocation == 3) {
+            this.context.shadowBlur = 5;
+        }
+        this.context.fillText(continueText, 20, 500);
         
     }
 

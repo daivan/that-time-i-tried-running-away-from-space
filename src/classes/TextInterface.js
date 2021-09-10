@@ -75,12 +75,13 @@ class TextInterface {
 
 	}
 
-	renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals){
+	renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals, attack){
 
 		let healthText = "Health: " + healthArray[0] + "/"+healthArray[1];
 		let oxygenText = "Oxygen: " + oxygenArray[0] + "/"+oxygenArray[1];
 		let distanceText = "Destination: " + distanceArray[0] + "/"+distanceArray[1];
 		let mineralText = "Minerals: " + minerals;
+		let attackPowerText = "Attack: " + attack;
 		this.context.font = "12px Arial";
 		this.context.fillStyle = "#FFF";
 		this.context.fillText(distanceText, 8, 18);
@@ -97,5 +98,7 @@ class TextInterface {
 		this.context.fillText(oxygenText, 8, 62);
 		this.context.fillStyle = "#FFFF00";
 		this.context.fillText(mineralText, 8, 84);
+		this.context.fillStyle = "#FF0000";
+		this.context.fillText(attackPowerText, 8, 104);
 	}
 }

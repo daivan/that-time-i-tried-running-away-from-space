@@ -3,14 +3,14 @@ class Game {
     constructor() {
         this.score = 0;
         this.state = 'start_menu';
-        this.mineral = 0;
+        this.mineral = 250;
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
-        this.currentOxygen = 200;
-        this.maxOxygen = 200;
-        this.currentHealth = 100;
-        this.maxHealth = 100;
+        this.currentOxygen = 20;
+        this.maxOxygen = 20;
+        this.currentHealth = 50;
+        this.maxHealth = 50;
         this.difficultySetting = 0;
     }
 
@@ -80,14 +80,14 @@ class Game {
     }
     resetGame() {
         this.score = 0;
-        this.maxOxygen = 200;
-        this.currentOxygen = 200;
+        this.maxOxygen = 20;
+        this.currentOxygen = 20;
         this.mineral = 0;
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
-        this.currentHealth = 100;
-        this.maxHealth = 100;
+        this.currentHealth = 50;
+        this.maxHealth = 50;
     }
 
     setLevel(difficultySetting) {

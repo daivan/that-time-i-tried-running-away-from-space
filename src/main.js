@@ -87,7 +87,7 @@ function gameLoop() {
 
         music.play();
 
-        game.state = 'map';
+        game.state = 'shop';
         state.pressedKeys.space = false;
     }
     if (state.pressedKeys.space && game.state === 'story' && game.currentLevel != 6) {
@@ -96,7 +96,7 @@ function gameLoop() {
 
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && shop.cursorLocation == 2 && game.state === 'shop') {
+    if (state.pressedKeys.space && shop.cursorLocation == 3 && game.state === 'shop') {
         game.state = 'map';
         state.pressedKeys.space = false;
     }
@@ -116,6 +116,14 @@ function gameLoop() {
         }
         state.pressedKeys.space = false;
     }
+    // Buy attack in store
+    if (state.pressedKeys.space && shop.cursorLocation == 2 && game.state === 'shop') {
+        if (game.getMineral() >= 100) {
+            ship.addAttackPower(2);
+            game.mineral -= 100;
+        }
+        state.pressedKeys.space = false;
+    }    
     if (state.pressedKeys.space && game.state === 'map') {
         
         game.setLevel(map.cursorLocation)
@@ -311,7 +319,7 @@ function gameLoop() {
         } else if (game.state === 'story') {
             story.render(game.currentLevel);
         } else if (game.state === 'shop') {
-            shop.render(game);
+            shop.render(game, ship);
         } else if (game.state === 'map') {
             map.render(game);
         } else if (game.state === 'end') {
@@ -321,15 +329,6 @@ function gameLoop() {
             oxygenArray = game.getOxygenArray();
             textInterface.renderDead(game.currentLevel);
         } else if (game.state === 'playing') {
-
-            healthArray = game.getHealthArray();
-            oxygenArray = game.getOxygenArray();
-            distanceArray = game.getDistanceArray();
-            minerals = game.getMineral();
-            textInterface.renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals);
-
-
-
 
             // PLAYING THE ACTUAL GAME
             ship.render();
@@ -382,6 +381,12 @@ function gameLoop() {
                   fireballList.push(fireball)
             }
 
+            healthArray = game.getHealthArray();
+            oxygenArray = game.getOxygenArray();
+            distanceArray = game.getDistanceArray();
+            minerals = game.getMineral();
+            textInterface.renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals, ship.damage);
+            
             lastTime = currentTime - (delta % interval);
 
 
@@ -438,7 +443,7 @@ function getObstaclePosition(array, gen_nums) {
 }
 
 function checkCollision(fireball, ship){
-    fireball.width = 64
+    fireball.width = 34
     fireball.height = 64
     ship.width =  64
     ship.height = 64
