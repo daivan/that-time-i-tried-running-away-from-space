@@ -25,8 +25,8 @@ class Shop {
             state.pressedKeys.up = false
         }
         if (state.pressedKeys.down) {
-            if(this.cursorLocation==3){
-                this.cursorLocation = 3
+            if(this.cursorLocation==5){
+                this.cursorLocation = 5
             }else{
                 this.cursorLocation += 1
             }
@@ -66,24 +66,34 @@ class Shop {
 
         this.context.font = "30px Arial";
         this.context.fillStyle = "#FFF";  //<======= here
-        this.context.fillText(title, 20, 270);
+        this.context.fillText(title, 20, 170);
         this.context.shadowBlur = 0;
         if (this.cursorLocation == 0) {
             this.context.shadowBlur = 5;
         }
-        this.context.fillText("Buy 25 Health - Cost 100 minerals", 20, 350);
+        this.context.fillText("Extend max Health - Cost 100 minerals", 20, 250);
         this.context.shadowBlur = 0;
         if (this.cursorLocation == 1) {
             this.context.shadowBlur = 5;
         }
-        this.context.fillText("Buy 25 Oxygen - Cost 100 minerals", 20, 400);
+        this.context.fillText("Extend max Oxygen - Cost 100 minerals", 20, 300);
         this.context.shadowBlur = 0;
         if (this.cursorLocation == 2) {
             this.context.shadowBlur = 5;
         }
-        this.context.fillText("Buy attack power - Cost 100 minerals", 20, 450);
+        this.context.fillText("Buy 10 Health - Cost 20 minerals", 20, 350);
         this.context.shadowBlur = 0;
         if (this.cursorLocation == 3) {
+            this.context.shadowBlur = 5;
+        }
+        this.context.fillText("Buy 10 Oxygen - Cost 20 minerals", 20, 400);
+        this.context.shadowBlur = 0;
+        if (this.cursorLocation == 4) {
+            this.context.shadowBlur = 5;
+        }
+        this.context.fillText("Buy attack power - Cost 100 minerals", 20, 450);
+        this.context.shadowBlur = 0;
+        if (this.cursorLocation == 5) {
             this.context.shadowBlur = 5;
         }
         this.context.fillText(continueText, 20, 500);

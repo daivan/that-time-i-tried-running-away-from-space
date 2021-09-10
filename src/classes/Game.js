@@ -7,8 +7,8 @@ class Game {
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
-        this.currentOxygen = 20;
-        this.maxOxygen = 20;
+        this.currentOxygen = 60;
+        this.maxOxygen = 60;
         this.currentHealth = 50;
         this.maxHealth = 50;
         this.difficultySetting = 0;
@@ -30,6 +30,16 @@ class Game {
             this.currentHealth = this.maxHealth;
         }
     }
+    addMaxOxygen(oxygen) {
+        this.maxOxygen += oxygen;
+        this.currentOxygen += oxygen;
+ 
+    }
+    addMaxHealth(health) {
+        this.maxHealth += health;
+        this.currentHealth += health;
+
+    }    
     getObstacleReward(obstacle) {
         if (obstacle.lootType == 'oxygen') {
             this.currentOxygen += obstacle.lootAmount;
@@ -80,8 +90,8 @@ class Game {
     }
     resetGame() {
         this.score = 0;
-        this.maxOxygen = 20;
-        this.currentOxygen = 20;
+        this.maxOxygen = 60;
+        this.currentOxygen = 60;
         this.mineral = 0;
         this.currentLevel = 0;
         this.currentDistance = 0;

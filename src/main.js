@@ -96,28 +96,44 @@ function gameLoop() {
 
         state.pressedKeys.space = false;
     }
-    if (state.pressedKeys.space && shop.cursorLocation == 3 && game.state === 'shop') {
+    if (state.pressedKeys.space && shop.cursorLocation == 5 && game.state === 'shop') {
         game.state = 'map';
         state.pressedKeys.space = false;
     }
-    // Buy health in store
+    // Buy extend health in store
     if (state.pressedKeys.space && shop.cursorLocation == 0 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
-            game.addHealth(25);
+            game.addMaxHealth(25);
             game.mineral -= 100;
         }
         state.pressedKeys.space = false;
     }
-    // Buy oxygen in store
+    // Buy extend oxygen in store
     if (state.pressedKeys.space && shop.cursorLocation == 1 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
-            game.addOxygen(25);
+            game.addMaxOxygen(25);
             game.mineral -= 100;
         }
         state.pressedKeys.space = false;
     }
-    // Buy attack in store
+    // Buy extend health in store
     if (state.pressedKeys.space && shop.cursorLocation == 2 && game.state === 'shop') {
+        if (game.getMineral() >= 20) {
+            game.addHealth(10);
+            game.mineral -= 20;
+        }
+        state.pressedKeys.space = false;
+    }
+    // Buy extend oxygen in store
+    if (state.pressedKeys.space && shop.cursorLocation == 3 && game.state === 'shop') {
+        if (game.getMineral() >= 20) {
+            game.addOxygen(10);
+            game.mineral -= 20;
+        }
+        state.pressedKeys.space = false;
+    }    
+    // Buy attack in store
+    if (state.pressedKeys.space && shop.cursorLocation == 4 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
             ship.addAttackPower(2);
             game.mineral -= 100;
@@ -386,7 +402,7 @@ function gameLoop() {
             distanceArray = game.getDistanceArray();
             minerals = game.getMineral();
             textInterface.renderInfoPanel(healthArray, oxygenArray, distanceArray, minerals, ship.damage);
-            
+
             lastTime = currentTime - (delta % interval);
 
 
