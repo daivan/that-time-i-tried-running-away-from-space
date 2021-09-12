@@ -93,6 +93,7 @@ class Obstacle {
 	takeDamage(damage){
 		this.showDamageAnimation = true;
 		this.currentHealth -= damage
+		music.hit();
 		if(this.currentHealth<=0){
 			this.destroy()
 		}
