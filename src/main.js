@@ -354,6 +354,8 @@ function gameLoop() {
                 let collision = checkCollision(fireball, ship);
                 if(collision){
                     fireballList = arrayRemove(fireballList, fireball);
+                    let text = `-15 Health`;
+                    visualsList.push(new FloatingText(cx, ship.getPosition(), text, "#FF0000"));
                     game.addHealth(-15)
                 }
 
