@@ -263,6 +263,8 @@ class Music {
     this.currentNote = 0
     this.ctx.suspend()
     this.nextNoteTime = 0;
+    this.songSection=0;
+    this.drumControl=0;
   }
 
 

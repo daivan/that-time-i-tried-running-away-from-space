@@ -344,6 +344,7 @@ function gameLoop() {
             score = 0;
             oxygenArray = game.getOxygenArray();
             textInterface.renderDead(game.currentLevel);
+            music.stop();
         } else if (game.state === 'playing') {
 
             // PLAYING THE ACTUAL GAME
