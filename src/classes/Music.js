@@ -35,6 +35,7 @@ class Music {
       this.masterVolume.connect(ctx.destination);
       this.masterVolume.gain.value = 0.05;
       this.snareBuffer=this.snareDrumNoiceBuffer();
+      this.hitBuffer=this.hitNoiceBuffer();
       this.songSection=0
       this.songSections= [
         "intro",
@@ -403,6 +404,43 @@ class Music {
     gain.gain.setValueAtTime(2,time);
     noise.connect(bandpass).connect(gain).connect(this.masterVolume);
     noise.start(time);
+  }
+
+
+ //effects
+  hitNoiceBuffer() {
+    const bufferSize = this.ctx.sampleRate * 0.05;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    let data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    return buffer;
+  }
+
+  hit(){
+    let noise = this.ctx.createBufferSource();
+    noise.buffer = this.hitBuffer;
+    let bandpass = this.ctx.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 200;
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(2,0);
+    noise.connect(bandpass).connect(gain).connect(this.masterVolume);
+    noise.start();
+  }
+
+  pickup(){
+    const osc = this.ctx.createOscillator();
+    const noteGain = this.ctx.createGain();
+    noteGain.connect(this.masterVolume);
+    osc.connect(noteGain);
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(this.notes['a'] * 1 / Math.pow(2, (1 - 2)), this.ctx.currentTime);
+    osc.frequency.setValueAtTime(this.notes['a'] * 1 / Math.pow(2, (1 - 3)), this.ctx.currentTime+0.1);
+    noteGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.5);
+    osc.start(this.ctx.currentTime);
+    osc.stop(this.ctx.currentTime + 0.5);
   }
   
 }
