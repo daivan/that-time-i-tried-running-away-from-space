@@ -406,6 +406,8 @@ class Music {
     noise.start(time);
   }
 
+
+ //effects
   hitNoiceBuffer() {
     const bufferSize = this.ctx.sampleRate * 0.05;
     const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
@@ -426,6 +428,19 @@ class Music {
     gain.gain.setValueAtTime(2,0);
     noise.connect(bandpass).connect(gain).connect(this.masterVolume);
     noise.start();
+  }
+
+  pickup(){
+    const osc = this.ctx.createOscillator();
+    const noteGain = this.ctx.createGain();
+    noteGain.connect(this.masterVolume);
+    osc.connect(noteGain);
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(this.notes['a'] * 1 / Math.pow(2, (1 - 2)), this.ctx.currentTime);
+    osc.frequency.setValueAtTime(this.notes['a'] * 1 / Math.pow(2, (1 - 3)), this.ctx.currentTime+0.1);
+    noteGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.5);
+    osc.start(this.ctx.currentTime);
+    osc.stop(this.ctx.currentTime + 0.5);
   }
   
 }

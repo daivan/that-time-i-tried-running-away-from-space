@@ -196,6 +196,7 @@ function gameLoop() {
                     if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
                         visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
+                        music.pickup();
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
 
@@ -235,6 +236,7 @@ function gameLoop() {
                     if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
                         visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
+                        music.pickup();
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -272,6 +274,7 @@ function gameLoop() {
                     if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
                         visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
+                        music.pickup();
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
@@ -308,6 +311,7 @@ function gameLoop() {
                     if (currentObstacle.lootType != "nothing") {
                         let text = `+${currentObstacle.lootAmount} ${currentObstacle.lootType}`;
                         visualsList.push(new FloatingText(cx, ship.getPosition(), text, currentObstacle.lootColor))
+                        music.pickup();
                     }
                     obstacleList = arrayRemove(obstacleList, currentObstacle);
                 }
