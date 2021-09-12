@@ -7,8 +7,8 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
 }
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
-let music = new Music(audioCtx)
+const audioCtx = new AudioContext({latencyHint: 'playback', sampleRate: 44100});
+let music = new Music(audioCtx);
 
 let canvas = document.getElementById('canvas'),
     cw = canvas.width,
