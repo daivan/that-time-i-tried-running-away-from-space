@@ -158,6 +158,7 @@ function gameLoop() {
     // Press Space if dead
     if (state.pressedKeys.space && game.state === 'dead') {
 
+        ship.restartGame()
         game.resetGame()
         ship.resetGame()
         obstacleList = []
@@ -411,7 +412,6 @@ function gameLoop() {
                         fireball.x = 704
                         fireball.y = position * 64;
                         fireballList.push(fireball)
-                        console.log("what")
                     }
                     spawnFireball = false
                 }else{
