@@ -26,6 +26,7 @@ class Ship {
 		this.position_x = 64;
 		this.position_y = 64;
 		this.dead = false;
+		this.damage = 2;
 	}
 	isDead() {
 		return this.dead;

@@ -7,7 +7,7 @@ for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
 }
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext({latencyHint: 'playback', sampleRate: 44100});
+const audioCtx = new AudioContext({ latencyHint: 'playback', sampleRate: 44100 });
 let music = new Music(audioCtx);
 
 let canvas = document.getElementById('canvas'),
@@ -30,6 +30,7 @@ let background = new Background(cx);
 let obstacleList = [];
 let fireballList = [];
 let visualsList = [];
+let spawnFireball = false
 
 let ship = new Ship(cx);
 
@@ -131,7 +132,7 @@ function gameLoop() {
             game.mineral -= 20;
         }
         state.pressedKeys.space = false;
-    }    
+    }
     // Buy attack in store
     if (state.pressedKeys.space && shop.cursorLocation == 4 && game.state === 'shop') {
         if (game.getMineral() >= 100) {
@@ -139,9 +140,9 @@ function gameLoop() {
             game.mineral -= 100;
         }
         state.pressedKeys.space = false;
-    }    
+    }
     if (state.pressedKeys.space && game.state === 'map') {
-        
+
         game.setLevel(map.cursorLocation)
         ship.resetGame()
         obstacleList = []
@@ -149,7 +150,7 @@ function gameLoop() {
 
 
         game.state = 'story'
-        
+
         state.pressedKeys.space = false;
 
 
@@ -357,7 +358,7 @@ function gameLoop() {
             fireballList.map(fireball => {
                 fireball.render()
                 let collision = checkCollision(fireball, ship);
-                if(collision){
+                if (collision) {
                     fireballList = arrayRemove(fireballList, fireball);
                     let text = `-15 Health`;
                     visualsList.push(new FloatingText(cx, ship.getPosition(), text, "#FF0000"));
@@ -388,9 +389,11 @@ function gameLoop() {
                     }
 
                 }
-                
-                var possibleObstacles = [0,1,2,3,4,5,6,7];
+
+                var possibleObstacles = [0, 1, 2, 3, 4, 5, 6, 7];
+                var possibleFireballs = [0, 1, 2, 3, 4, 5, 6, 7];
                 var gen_nums = [];
+                var gen_nums_fireball = [];
                 difficulty = game.getDifficulty()
                 for (let i = 0; i < difficulty; i++) {
                     let position = getObstaclePosition(possibleObstacles, gen_nums)
@@ -398,10 +401,25 @@ function gameLoop() {
                     obstacle.x = 704
                     obstacle.y = position * 64;
                     obstacleList.push(obstacle)
-                  }
-           
-                  let fireball = new Fireball(cx);
-                  fireballList.push(fireball)
+                }
+
+                if(spawnFireball){
+
+                    for (let i = 0; i < difficulty; i++) {
+                        let position = getObstaclePosition(possibleFireballs, gen_nums_fireball)
+                        let fireball = new Fireball(cx);
+                        fireball.x = 704
+                        fireball.y = position * 64;
+                        fireballList.push(fireball)
+                        console.log("what")
+                    }
+                    spawnFireball = false
+                }else{
+                
+                    spawnFireball = true
+                }
+
+
             }
 
             healthArray = game.getHealthArray();
@@ -451,31 +469,31 @@ function arrayRemove(arr, value) {
 
 
 function in_array(array, el) {
-   for(var i = 0 ; i < array.length; i++) 
-       if(array[i] == el) return true;
-   return false;
+    for (var i = 0; i < array.length; i++)
+        if (array[i] == el) return true;
+    return false;
 }
 
 function getObstaclePosition(array, gen_nums) {
-    var rand = array[Math.floor(Math.random()*array.length)];
-    if(!in_array(gen_nums, rand)) {
-       gen_nums.push(rand); 
-       return rand;
+    var rand = array[Math.floor(Math.random() * array.length)];
+    if (!in_array(gen_nums, rand)) {
+        gen_nums.push(rand);
+        return rand;
     }
     return getObstaclePosition(array, gen_nums);
 }
 
-function checkCollision(fireball, ship){
+function checkCollision(fireball, ship) {
     fireball.width = 34
     fireball.height = 64
-    ship.width =  64
+    ship.width = 64
     ship.height = 64
 
     if (fireball.x < ship.position_x + ship.width &&
         fireball.x + fireball.width > ship.position_x &&
         fireball.y < ship.position_y + ship.height &&
         fireball.y + fireball.height > ship.position_y) {
-         // collision detected!
-         return true
-     }
+        // collision detected!
+        return true
+    }
 }

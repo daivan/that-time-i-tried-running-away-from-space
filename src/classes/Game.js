@@ -92,7 +92,7 @@ class Game {
         this.score = 0;
         this.maxOxygen = 60;
         this.currentOxygen = 60;
-        this.mineral = 0;
+        this.mineral = 250;
         this.currentLevel = 0;
         this.currentDistance = 0;
         this.maxDistance = 60;
