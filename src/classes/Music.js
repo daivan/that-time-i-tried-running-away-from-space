@@ -27,9 +27,9 @@ class Music {
       this.currentNote = 0;
       this.nextNoteTime = 0.0; // when the next note is due.
       this.instruments=[
-        new Instrument("sine",0.2,0.2,0.2,0,10,-1,0.8),
-        new Instrument("triangle",0.2,0.2,0.2,0,10,2,0.8),
-        new Instrument("square",0.04,0.04,0.2,3.5,10,1,0.4),
+        new Instrument("sine",0.2,0.2,0.2,0,10,-1,0.6),
+        new Instrument("triangle",0.2,0.2,0.2,0,10,2,0.6),
+        new Instrument("square",0.04,0.04,0.2,3.5,10,1,0.2),
       ];
       this.masterVolume= ctx.createGain();
       this.masterVolume.connect(ctx.destination);
@@ -378,7 +378,7 @@ class Music {
 
     osc.connect(gain);
     gain.connect(this.masterVolume);
-    gain.gain.setValueAtTime(2,time);
+    gain.gain.setValueAtTime(1.6,time);
     gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
     osc.start(time);
     osc.stop(time+0.15 );
@@ -401,7 +401,7 @@ class Music {
     bandpass.type = 'bandpass';
     bandpass.frequency.value = 1000;
     const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(2,time);
+    gain.gain.setValueAtTime(1.6,time);
     noise.connect(bandpass).connect(gain).connect(this.masterVolume);
     noise.start(time);
   }
@@ -425,7 +425,7 @@ class Music {
     bandpass.type = 'bandpass';
     bandpass.frequency.value = 200;
     const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(2,0);
+    gain.gain.setValueAtTime(5,0);
     noise.connect(bandpass).connect(gain).connect(this.masterVolume);
     noise.start();
   }
